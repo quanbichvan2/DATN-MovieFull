@@ -11,6 +11,8 @@ import { getFormattedDate, getDayOfWeek, formatCurrency } from "./ulti";
 import { SnackComponent } from "./snack";
 import { Movie } from "../../models/movieDetail";
 import { Link } from "react-router-dom";
+import { SeatType } from "../../models/seat";
+// import { useSeatsTypeQuerry } from "../../hooks/useSeatType";
 interface Seat {
     seatNumber: string;
     type: "regular" | "vip" | "couple";
@@ -39,27 +41,25 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [seatDiagram, setSeatDiagram] = useState<Row[]>([]);
     const [selectedSeats, setSelectedSeats] = useState<{ regular: number; vip: number; couple: number }>({ regular: 0, vip: 0, couple: 0 });
-    const [maxSeats, setMaxSeats] = useState({ regular: 0, vip: 0, couple: 0 });
     const [countdown,] = useState<number>(300); // Giá trị ban đầu là 300 giây (5 phút)
     const totalPrice = 675000; // Giá trị tạm tính
-    
+
     const [products, setProducts] = useState<Product[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    
-    // const firstdate: Day = {
-        //     date: "2024-10-21",
-        //     times: ["09:00 AM", "11:00 AM", "14:00 PM", "17:00 PM", "20:00 PM"]
-        // }
-        // const [selectedDay, setSelectedDay] = useState<Day | null>(firstdate);
+
+    // const [selectedDay, setSelectedDay] = useState<Day | null>(firstdate);
     const [selectedDay, setSelectedDay] = useState<ListTime | null>();
     const [availableTimes, setAvailableTimes] = useState<string[]>([]);
 
-
+    const [seatTypes, setSeatTypes] = useState<SeatType[]>([]);
+    const [maxSeats, setMaxSeats] = useState({ regular: 90, vip: 0, couple: 10 });
     // const handleSelectShow(test: Show) => {
     //     setSelectedDay(test.startTime)
     // }
+    // const { data, isLoading } = useSeatsTypeQuerry();
+
     useEffect(() => {
         if (selectedTime) {
             const processedSeatDiagram = seatDiagramData.map((row) => ({
@@ -102,9 +102,10 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             try {
                 const productsData = await productService.getProducts();
                 const categoriesData = await categoryService.getCategories();
-                // const seatTypeData = await seatService.getSeats();
+                const seatTypeData = await seatService.getAllSeatsType();
                 setProducts(productsData);
                 setCategories(categoriesData); // Chuyển đổi thành instance của Category
+                setSeatTypes(seatTypeData);
             } catch (err) {
                 setError("Failed to fetch data");
                 console.error(err);
@@ -137,7 +138,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const handleSelectDay = (day: ListTime) => {
         setSelectedDay(day);
         // setSelectedTime(null);
-        setAvailableTimes(day.showTimes.map((showTime) => showTime.time)); 
+        setAvailableTimes(day.showTimes.map((showTime) => showTime.time));
         setSeatDiagram([]);
     };
 
@@ -146,78 +147,54 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     };
 
     const handleSelectSeat = (seat: Seat, rowIndex: number, seatIndex: number) => {
-        if (selectedSeats[seat.type] < maxSeats[seat.type] && !seat.isSelected) {
-            setSelectedSeats((prev) => ({
-                ...prev,
-                [seat.type]: prev[seat.type] + (seat.type === "couple" ? 2 : 1),
-            }));
+        const seatType = seat.type;
+        const isSeatSelected = seat.isSelected;
 
-            setSeatDiagram((prev) => {
-                const updatedDiagram = [...prev];
-                updatedDiagram[rowIndex].seats[seatIndex].isSelected = true;
+        // Cập nhật số ghế đã chọn
+        setSelectedSeats((prev) => {
+            const updatedSeats = { ...prev };
 
-                // Nếu là ghế đôi, chọn cả 2 ghế liền kề
-                if (seat.type === "couple" && seatIndex < updatedDiagram[rowIndex].seats.length - 1) {
-                    updatedDiagram[rowIndex].seats[seatIndex + 1].isSelected = true;
-                }
+            // Nếu ghế chưa được chọn và số ghế chưa đạt tối đa
+            if (!isSeatSelected && selectedSeats[seatType] < maxSeats[seatType]) {
+                // Nếu ghế đôi, cộng 2 ghế vào, nếu không thì cộng 1 ghế
+                updatedSeats[seatType] += (seatType === "couple" ? 2 : 1);
+            } else if (isSeatSelected) {
+                // Nếu ghế đã được chọn, giảm số ghế đã chọn
+                updatedSeats[seatType] -= (seatType === "couple" ? 2 : 1);
+            }
 
-                return updatedDiagram;
-            });
-        } else if (seat.isSelected) {
-            setSelectedSeats((prev) => ({
-                ...prev,
-                [seat.type]: prev[seat.type] - (seat.type === "couple" ? 2 : 1),
-            }));
+            return updatedSeats;
+        });
 
-            setSeatDiagram((prev) => {
-                const updatedDiagram = [...prev];
-                updatedDiagram[rowIndex].seats[seatIndex].isSelected = false;
+        // Cập nhật trạng thái ghế trong sơ đồ ghế
+        setSeatDiagram((prev) => {
+            const updatedDiagram = [...prev];
+            const selectedSeat = updatedDiagram[rowIndex].seats[seatIndex];
 
-                // Nếu là ghế đôi, bỏ chọn cả 2 ghế liền kề
-                if (seat.type === "couple" && seatIndex < updatedDiagram[rowIndex].seats.length - 1) {
-                    updatedDiagram[rowIndex].seats[seatIndex + 1].isSelected = false;
-                }
+            // Nếu là ghế đôi, chọn cả 2 ghế liền kề
+            if (seatType === "couple" && seatIndex < updatedDiagram[rowIndex].seats.length - 1) {
+                updatedDiagram[rowIndex].seats[seatIndex].isSelected = !isSeatSelected;
+                updatedDiagram[rowIndex].seats[seatIndex + 1].isSelected = !isSeatSelected;
+            } else {
+                selectedSeat.isSelected = !isSeatSelected;
+            }
 
-                return updatedDiagram;
-            });
-        }
-    };
-
-    const handleTicketSelection = (type: "regular" | "vip" | "couple", increment: number) => {
-        setMaxSeats((prev) => {
-            const newMax = Math.max(prev[type] + increment * (type === "couple" ? 2 : 1), 0); // Thêm 2 ghế nếu là ghế đôi
-            setSeatDiagram((prevDiagram) => {
-                const updatedDiagram = prevDiagram.map((row) => {
-                    // Duyệt qua từng ghế trong sơ đồ để điều chỉnh việc chọn/bỏ chọn
-                    const updatedSeats = [...row.seats];
-                    if (increment < 0) {
-                        // Khi giảm ghế, bỏ chọn ghế đã chọn cuối cùng
-                        for (let i = updatedSeats.length - 1; i >= 0; i--) {
-                            if (updatedSeats[i].type === type && updatedSeats[i].isSelected) {
-                                updatedSeats[i].isSelected = false;
-                                if (type === "couple" && i > 0 && updatedSeats[i - 1].type === "couple") {
-                                    updatedSeats[i - 1].isSelected = false; // Bỏ cả cặp ghế đôi
-                                }
-                                break; // Bỏ chọn chỉ một ghế (hoặc một cặp nếu là couple), sau đó dừng
-                            }
-                        }
-                    }
-
-                    return { ...row, seats: updatedSeats };
-                });
-
-                // Cập nhật số lượng ghế đã chọn
-                setSelectedSeats((prevSelected) => ({
-                    ...prevSelected,
-                    [type]: Math.min(prevSelected[type], newMax),
-                }));
-
-                return updatedDiagram;
-            });
-
-            return { ...prev, [type]: newMax };
+            return updatedDiagram;
         });
     };
+
+
+
+    const handleTicketSelection = (type: "regular" | "vip" | "couple", increment: number) => {
+        const updatedSeats = {
+            ...selectedSeats,
+            [type]: Math.max(0, selectedSeats[type] + (type === "couple" ? increment * 2 : increment)), // Đảm bảo ghế đôi là bội số của 2
+        };
+
+        // Cập nhật state số ghế đã chọn
+        setSelectedSeats(updatedSeats);
+    };
+
 
     const handleSubmit = () => {
         const totalSeats = selectedSeats.regular + selectedSeats.vip + selectedSeats.couple * 2;
@@ -255,17 +232,17 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                     {shows.shows?.listHall.map((hall, index) => (
                         <div
                             key={hall.hallId}
-                           
+
                             id={`show${index + 1}`}
                         // onClick={() => handleSelectShow(show)}
                         >
                             {
                                 hall.listTime.map((time, index) => (
-                                    <button 
-                                        className="btn btn-outline-warning date-btn mb-2" 
-                                        key={index} 
+                                    <button
+                                        className="btn btn-outline-warning date-btn mb-2"
+                                        key={index}
                                         onClick={() => handleSelectDay(time)}
-                                        >
+                                    >
                                         {time.startTime}
                                     </button>
                                 ))}
@@ -279,12 +256,12 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
 
             <div className="d-flex justify-content-center mb-4">
                 {availableTimes.map((time, index) => (
-              <button
-                key={index}
-                className={`btn ${selectedTime === time ? "btn-warning" : "btn-outline-primary"} time-btn mx-2 mb-2`}
-                onClick={() => handleSelectTime(time)}
-              >
-                {time}
+                    <button
+                        key={index}
+                        className={`btn ${selectedTime === time ? "btn-warning" : "btn-outline-primary"} time-btn mx-2 mb-2`}
+                        onClick={() => handleSelectTime(time)}
+                    >
+                        {time}
                     </button>
                 ))}
             </div>
@@ -294,6 +271,42 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 <div>
                     <h2>Chọn Loại Vé</h2>
                     <div className="d-flex justify-content-around mb-4">
+                        {seatTypes.map((seatType) => {
+                            // Xác định loại ghế (regular, vip, couple) từ name
+                            const seatTypeKey: "regular" | "vip" | "couple" =
+                                seatType.name === "Ghế VIP" ? "vip" :
+                                    seatType.name === "Ghế đôi" ? "couple" : "regular";
+
+                            return (
+                                <div key={seatType.id} className="ticket-box text-light p-3" style={{ minWidth: "400px" }}>
+                                    <h4>{seatType.name}</h4> {/* Tên loại ghế */}
+                                    <p>{seatType.price.toLocaleString()} VND</p> {/* Giá loại ghế */}
+
+                                    {/* Điều chỉnh số lượng ghế */}
+                                    <div className="d-flex align-items-center">
+                                        <button
+                                            className="btn btn-outline-secondary"
+                                            onClick={() => handleTicketSelection(seatTypeKey, -1)} // Giảm số lượng ghế
+                                        >
+                                            -
+                                        </button>
+                                        <span style={{ margin: "0 10px" }}>
+                                            {seatType.name === "Ghế đôi"
+                                                ? selectedSeats[seatTypeKey] / 2 // Hiển thị số lượng ghế đôi đã chọn
+                                                : selectedSeats[seatTypeKey]}  {/* Hiển thị số ghế đã chọn */}
+                                        </span>
+                                        <button
+                                            className="btn btn-outline-secondary"
+                                            onClick={() => handleTicketSelection(seatTypeKey, 1)} // Tăng số lượng ghế
+                                        >
+                                            +
+                                        </button>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                    {/* <div className="d-flex justify-content-around mb-4">
                         {["regular", "vip", "couple"].map((type) => (
                             <div className="ticket-box text-light p-3" style={{ minWidth: "400px" }} key={type}>
                                 <h4>{type === "regular" ? "Ghế Thường" : type === "vip" ? "Ghế VIP" : "Ghế Đôi"}</h4>
@@ -322,7 +335,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
                     {/* Sơ đồ ghế */}
                     <h2>Sơ Đồ Rạp</h2>
