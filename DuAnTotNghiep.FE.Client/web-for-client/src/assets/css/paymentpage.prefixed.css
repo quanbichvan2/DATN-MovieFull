@@ -245,3 +245,10 @@
     margin-top: 20px;
   }
 }
+
+.paymentPage .payment-option.active {
+  border: 2px solid #ffcc00; /* Đường viền sáng màu */
+  background-color: rgba(255, 255, 0, 0.2); /* Nền màu nhạt */
+  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5); /* Hiệu ứng phát sáng */
+  transition: all 0.3s ease;
+}
