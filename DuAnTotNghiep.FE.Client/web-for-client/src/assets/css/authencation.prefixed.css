@@ -1,0 +1,97 @@
+.AuthencationPage .tab-content{
+    background-color: #f8fafc;
+  }
+  .AuthencationPage {
+    background-color: #101E4B;
+    background-image: url('../Img/mobile-blur-6.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 64px;
+    margin-top: 20px;
+  }
+  .AuthencationPage .tab-content input:focus{
+    outline: none;
+    box-shadow: 0 0 0 1px black;
+   }
+
+   .AuthencationPage .tab-content > .tab-pane {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    position: absolute;
+    width: 100%;
+  } 
+  .AuthencationPage .action-auth .tab-content{
+    color:#000 ;
+    
+  }
+  .AuthencationPage .tab-content .btn-login{
+    width: 100%;
+    color:black;
+    background: #f3ea28;
+    border: none;
+  }
+   
+  .AuthencationPage .tab-content .btn-register{
+    width: 100%;
+    color:black;
+    background: #f3ea28;
+    border: none;
+  }
+   /* Đổi màu tab khi active */
+   .AuthencationPage .nav-tabs .nav-link.active {
+    background-color: white; /* Màu vàng cho tab Đăng nhập */
+    color: black; /* Màu chữ khi active */
+    
+
+
+}
+
+.AuthencationPage .tab-content > .active {
+  opacity: 1;
+  transform: translateX(0);
+  position: relative;
+}
+.AuthencationPage .nav-tabs .nav-link {
+    color: White; /* Màu chữ khi chưa active */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect */
+.AuthencationPage .nav-tabs .nav-link:hover {
+    background-color: #757575; /* Màu khi hover */
+    
+}
+.AuthencationPage .rotate {
+    transition: transform 0.3s ease;
+  }
+  .AuthencationPage .rotate.down {
+    transform: rotate(90deg);
+  }
+   /* CSS để giới hạn chiều cao và thêm thanh cuộn */
+   .AuthencationPage  .scrollable-content {
+    max-height: 200px; /* Chiều cao tối đa của nội dung */
+    overflow-y: auto;  /* Kích hoạt thanh cuộn dọc */
+    font-size: 12px;
+  }
+   /* Tùy chỉnh thêm cho mũi tên */
+   .AuthencationPage .toggle-arrow {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+  .AuthencationPage .toggle-arrow.down {
+    transform: rotate(90deg);
+  }
+  .AuthencationPage .Forget-Password{
+    color: white;
+    max-width: 44.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 600;
+  }
+  .AuthencationPage .btn-login{
+    width: 100%;
+    color:black;
+    background: #f1c40f;
+  }

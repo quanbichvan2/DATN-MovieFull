@@ -1,0 +1,90 @@
+.info .sidebar {
+  width: 100%;
+  max-width: 250px;
+  background: linear-gradient(45deg, #2b5876, #4e4376);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.info .sidebar .profile-section img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.info .sidebar .profile-section h5, 
+.info .sidebar .profile-section a {
+  font-size: 18px;
+  color: #ddd;
+  margin: 0;
+}
+
+.info .sidebar .profile-section a {
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.info .sidebar .profile-section h5 {
+  padding: 20px;
+}
+
+.info .sidebar .points p {
+  font-size: 15px;
+  color: #ff8c00;
+}
+
+.info .sidebar .progress-bar {
+  background-color: #ff8c00;
+}
+
+.info .sidebar .nav-link {
+  color: #ddd;
+  padding: 10px 0;
+  font-size: 18px;
+}
+
+.info .sidebar .nav-link:hover {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.info .sidebar .logout {
+  color: #ccc;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+  .info .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .info .sectionForm {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 576px) {
+  .info .sidebar .profile-section img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .info .sidebar .nav-link {
+    font-size: 16px;
+  }
+
+  .info .sidebar .logout {
+    font-size: 14px;
+  }
+}
+
+.info .point-content img {
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px 0;
+}

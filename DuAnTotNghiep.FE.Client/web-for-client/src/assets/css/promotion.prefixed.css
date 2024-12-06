@@ -1,0 +1,143 @@
+/* Cài đặt cơ bản cho màn hình lớn hơn */
+.promotion {
+    padding: 50px 0 200px 0;
+    margin-top: 115px;
+    background-color: #101E4B;
+    color: white;
+}
+
+.promotion .btn {
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.promotion .promotionRow {
+    margin-top: 4rem;
+}
+
+.promotion .promotionTitle {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 0 #1e89cb;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation: bounce 2s infinite;
+}
+
+.promotion .promotionRow-infor ul { 
+    list-style: disc;
+}
+
+.promotion .promotionList {
+    color: #fff;
+    line-height: 36px;
+}
+
+.promotion .btnBooking {
+    background-color: #ffcc00; 
+    color: #0a0f24;
+}
+
+.promotion .imagePromotion {
+    height: 23rem;
+    display: flex; 
+    justify-content: space-between;
+    object-fit: cover;
+}
+
+.promotion .promotionRow-2 {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+/* Định nghĩa keyframe cho nhấp nhô */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.25);
+    }
+}
+
+.promotion .promotionTitle:hover {
+    color: #f39c12;
+}
+
+.promotion .btn-hoverEffect {
+    background-color: #ffcc00;
+    color: #0a0f24;
+    transition: background-color 1s ease, box-shadow 0.5s ease;
+}
+
+.promotion .btn-hoverEffect:hover {
+    background-color: #8a2be2;
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.8), 0 0 30px rgba(138, 43, 226, 0.6);
+}
+
+.promotion .btn-hoverEffect:active {
+    background-color: #dda0dd;
+}
+
+.promotion .promotionRow-img img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+/* Kích thước trung bình - tablets */
+@media screen and (max-width: 768px) {
+    .promotion {
+        padding: 30px 0 100px 0;
+        margin-top: 50px;
+    }
+    .promotion .promotionRow-infor {
+        max-height: 320px !important;
+        margin-bottom: 4rem ;
+    }
+    .promotion .promotionTitle {
+        font-size: 2.2rem; /* Giảm font-size cho tiêu đề */
+        margin-top: 5rem;
+    }
+    .promotion .imagePromotion {
+        height: 20rem;
+    }
+}
+
+/* Kích thước nhỏ hơn - điện thoại */
+@media screen and (max-width: 576px) {
+    .promotion .promotionRow-infor, .promotion .promotionRow-img {
+        margin-top: 80px;
+    }
+    .promotion .promotionTitle {
+        font-size: 1.8rem; /* Tiêu đề nhỏ hơn trên màn hình điện thoại */
+    }
+    .promotion .promotionRow {
+        margin-top: 2rem;
+    }
+    .promotion .promotionList {
+        line-height: 30px; /* Khoảng cách dòng hẹp hơn */
+    }
+    .promotion .imagePromotion {
+        height: 18rem;
+    }
+}
+
+/* Kích thước rất nhỏ - điện thoại nhỏ hơn */
+@media screen and (max-width: 480px) {
+    .promotion {
+        padding: 20px 0 80px 0;
+        margin-top: 20px;
+    }
+    .promotion .promotionTitle {
+        font-size: 2.5rem;
+        margin-top: 7rem;
+    }
+    .promotion .promotionRow-infor ul {
+        padding-left: 20px; /* Khoảng cách từ lề trái */
+    }
+    .promotion .imagePromotion {
+        height: 15rem;
+    }
+}

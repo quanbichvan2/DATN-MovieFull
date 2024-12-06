@@ -1,0 +1,499 @@
+.showSchedulePage {
+  margin: 0;
+}
+
+.showSchedulePage .current-movieList h1 {
+  font-size: 4rem;
+  display: flex;
+  justify-content: center;
+  font-weight: 900;
+}
+
+.showSchedulePage hr {
+  border: 1px solid #a9a9a9;
+}
+
+.showSchedulePage .col-md-3 .movie-poster {
+  max-width: 100%;
+  max-height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  object-fit: cover;
+}
+
+.showSchedulePage .col-md-9 .row .card-title {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffcd39;
+  text-decoration: none;
+}
+
+.showSchedulePage .col-md-9 h5 {
+  margin: 5px 0;
+  color: #fff;
+}
+
+.showSchedulePage .col-md-9 p {
+  margin: 5px 0;
+  color: #ccc
+}
+
+.showSchedulePage .col-md-9 .info-badge {
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+.showSchedulePage .col-md-9 .badge-warning {
+  background-color: #ffc107; /* Màu vàng */
+  color: #000000;
+}
+
+.showSchedulePage .col-md-9 .badge-success {
+  background-color: #28a745; /* Màu xanh lá */
+  color: #ffffff;
+}
+
+.showSchedulePage .col-md-9 .badge-primary {
+  background-color: #3055e8; /* Màu xanh dương */
+  color: #ffffff;
+}
+
+.showSchedulePage .col-md-9 .badge-danger {
+  background-color: #ec281a; /* Màu đỏ */
+  color: #ffffff;
+}
+
+.showSchedulePage .col-md-9 .badge-secondary {
+  background-color: #666667; /* Màu xám */
+  color: #ffffff;
+}
+
+.showSchedulePage .form-select .btn-date {
+  background-color: #0b163b;
+  color: #F8FAFC;
+  border: .1rem solid rgba(248, 250, 252, .5);
+  margin: 7px 5px;
+  width: 70px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.showSchedulePage .col-md-9 .btn-date:hover {
+  background-color: #ffcd39;
+  color: #0b163b;
+}
+
+.showSchedulePage .movie-poster {
+  width: 100%;
+  /* max-height: 400px; */
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.showSchedulePage .schedule-btn {
+  background-color: #0b163b;
+  color: #F8FAFC;
+  border: .1rem solid rgba(248, 250, 252, .5);
+  margin: 7px 0;
+  width: 70px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 0.8rem;
+  padding-inline: inherit;
+}
+
+/* .showSchedulePage .schedule-btn:hover {
+  background-color: #ffcd39;
+  color: #0b163b;
+} */
+
+.showSchedulePage .container .row a {
+  font-size: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.showSchedulePage .container .row a:hover {
+  text-decoration: underline;
+  color: #ffc107;
+}
+
+.showSchedulePage .actions {
+  display: flex;
+  align-items: center;
+}
+
+.showSchedulePage .actions .btn-primary {
+  background-color: #FFD700;
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.showSchedulePage .actions .login-btn {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+
+.showSchedulePage .show-time-date {
+  border: 1px solid #a9a9a9;
+  border-radius: .8rem;
+  padding: 10px;
+  color: #F3EA28;
+  font-size: large;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.showSchedulePage .show-time {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.showSchedulePage .show-time .show-time-icon {
+
+  filter: brightness(0) saturate(100%) invert(98%) sepia(80%) saturate(2086%) hue-rotate(336deg) brightness(109%) contrast(91%);
+  max-height: 2.6rem;
+  width: 3rem;
+  height: 3rem;
+  padding-left: 1rem;
+}
+
+.showSchedulePage .show-movie {
+  border: 1px solid #a9a9a9;
+  border-radius: .8rem;
+  padding: 10px;
+  color: #F3EA28;
+  font-size: large;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}
+
+.showSchedulePage .show-cinema {
+  border: 1px solid #a9a9a9;
+  border-radius: .8rem;
+  padding: 10px;
+  color: #F3EA28;
+  font-size: large;
+}
+
+.showSchedulePage .container-custom {
+  width: 90%;
+  /* Chiếm 90% chiều rộng trang */
+  margin: 0 auto;
+  /* Căn giữa header */
+}
+
+/* Điều chỉnh chiều rộng của container-fluid */
+.showSchedulePage .container-fluid {
+  width: 90%;
+  /* Chiếm 90% viewport width */
+  margin: 0 auto;
+  /* Center the container */
+}
+
+.showSchedulePage .navbar-toggler {
+  border: none;
+  color: white;
+}
+
+.showSchedulePage .navbar-toggler-icon {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/1828/1828859.png');
+  /* Hamburger icon */
+  width: 24px;
+  height: 24px;
+}
+
+/* Đảm bảo navbar collapse xuất hiện chính xác trên mobile */
+.showSchedulePage .collapse {
+  flex-grow: 0;
+}
+
+/* Điều chỉnh padding cho navbar collapse ở mobile */
+.showSchedulePage .collapse ul li {
+  padding: 10px 0;
+}
+
+.showSchedulePage .input-group {
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  .showSchedulePage .input-group {
+    width: 100%;
+    /* Input full width on mobile */
+  }
+
+  .showSchedulePage .btn {
+    width: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  /* Các icon khi hiển thị trên mobile */
+  .showSchedulePage .btn .fas {
+    font-size: 20px;
+  }
+}
+
+.showSchedulePage .social-icons {
+  margin-right: 50px;
+}
+
+.showSchedulePage .social-icons a {
+  font-size: 32px;
+  margin-right: 20px;
+  color: #ffffff;
+}
+
+
+
+
+.showSchedulePage .movie-item-wrapper {
+  background-color: blue;
+}
+
+.showSchedulePage .movie-list-item-wrapper {
+  position: relative;
+}
+
+.showSchedulePage .movie-title-hover {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.showSchedulePage .movie-title {
+  text-align: center;
+  margin: 10px;
+  font-weight: bold;
+}
+
+.showSchedulePage .item-booking-movie {
+  display: flex;
+  justify-content:
+    space-between;
+  align-items: center;
+  width: 100%;
+
+}
+
+.showSchedulePage .item-booking-link {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 40px;
+  /* margin-right: 2rem; */
+  flex-grow: 2;
+  /* Trailer chiếm nhiều không gian hơn */
+}
+
+.showSchedulePage .item-booking-icon {
+  height: 40px;
+  margin-bottom: -15px;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.showSchedulePage .btn-item-booking {
+  height: 40px;
+  width: 80px;
+  flex-grow: 1;
+}
+
+.showSchedulePage .movie-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin: 20px 0;
+  /* Spacing around the movie list */
+}
+
+.showSchedulePage .movie-list-item {
+  position: relative;
+  width: 22%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  /* Limit child overflow */
+  transition: transform 0.3s ease;
+}
+
+.showSchedulePage .movie-list-item img {
+  width: 100%;
+  height: 450px;
+  display: block;
+}
+
+.showSchedulePage .movie-list-item:hover {
+  transform: scale(1.05);
+}
+
+.showSchedulePage .movie-list-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 450px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.showSchedulePage .movie-list-info ul {
+  list-style: none;
+}
+
+.showSchedulePage .movie-list-item:hover .movie-list-info {
+  opacity: 1;
+}
+
+.showSchedulePage .movie-buttons {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.showSchedulePage .movie-buttons button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.showSchedulePage .movie-buttons button:hover {
+  background-color: #0056b3;
+}
+
+.showSchedulePage .carousel-container {
+  position: relative;
+  max-width: 100%;
+}
+
+.showSchedulePage .carousel-control-prev,
+.showSchedulePage .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Optional styling for visibility */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15rem;
+  /* Adjust for carousel position */
+}
+
+.showSchedulePage .carousel-control-prev {
+  left: -60px;
+  /* Move button to the left of the carousel */
+}
+
+.showSchedulePage .carousel-control-next {
+  right: -60px;
+  /* Move button to the right of the carousel */
+}
+
+.showSchedulePage .FooterText {
+  padding: 20px 40px 0 80px;
+}
+
+/* Media Queries for responsive design */
+@media (max-width: 768px) {
+  .showSchedulePage .movie-list-item {
+    width: 100%;
+    /* Stack items in single column on mobile */
+  }
+
+  .showSchedulePage .carousel-control-prev,
+  .showSchedulePage .carousel-control-next {
+    left: 10px;
+    /* Adjust buttons for mobile */
+    right: 10px;
+  }
+}
+
+.showSchedulePage #prevBtn {
+  position: absolute;
+  left: -50px;
+  z-index: 10;
+  border: none;
+  background-color: transparent;
+  font-size: 3rem;
+  color: #a09c9c;
+}
+
+.showSchedulePage #nextBtn {
+  position: absolute;
+  right: -50px;
+  z-index: 10;
+  border: none;
+  background-color: transparent;
+  font-size: 3rem;
+  color: #a09c9c;
+}
+
+.showSchedulePage .item-booking-link span {
+  font-size: 16px;
+
+}
+
+.showSchedulePage .FooterText {
+
+  padding: 20px 40px 0 80px;
+}
+
+.showSchedulePage * {
+  box-sizing: none;
+}
+
+.showSchedulePage header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Thêm bóng mờ */
+}
+
+.showSchedulePage main {
+  background-color: #101E4B;
+  color: white;
+}
+
+.showSchedulePage .movieList-item{
+  margin-bottom: 2rem;
+}
+
+.showSchedulePage .btn-yellow-border {
+  border: 2px solid #e5e542; /* Đặt màu sắc và độ dày của border */
+  color: #ffff5d; /* Màu chữ */
+  cursor: pointer; /* Hiển thị con trỏ chuột dạng tay khi di chuột qua */
+}

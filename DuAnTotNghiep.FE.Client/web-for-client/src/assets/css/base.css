@@ -1,0 +1,428 @@
+/* style.css - Global Styles */
+
+/* RESET */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-size: 16px;
+  font-family: 'Nunito', sans-serif; /* Choose a default font for the whole project */
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.text-light{
+    color: #fff;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* CUSTOM VARIABLES */
+:root {
+  --primary-color: #007bff; /* Default primary color */
+  --secondary-color: #6c757d; /* Default secondary color */
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+
+  --font-color: #333333; /* Main text color */
+  --background-color: #ffffff; /* Background color */
+  --border-color: #dddddd; /* Border color */
+  --link-hover-color: #0056b3; /* Link hover color */
+  
+  /* Responsive breakpoints */
+  --small-screen: 576px;
+  --medium-screen: 768px;
+  --large-screen: 992px;
+  --extra-large-screen: 1200px;
+}
+
+/* GLOBAL ELEMENT STYLES */
+body {
+  color: var(--font-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+button, input, textarea {
+  font-family: 'Nunito', sans-serif; /* Choose a default font for the whole project */
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--border-color);
+  margin: 1.5rem 0;
+}
+
+/* LINK STYLES */
+a:hover {
+  color: var(--link-hover-color);
+}
+
+/* FORM ELEMENTS */
+input, select, textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  color: #fff;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: var(--medium-screen)) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* STYLES CHO HEADER */
+/* Global Styles for Header */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #101526;
+    padding: 10px 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 115px;
+}
+
+.header-container {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.header-logo-img {
+    height: 80px;
+    border-radius: 24px;
+    border: 3px solid #ffffff;
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.header-booking-btn {
+    margin-left: 60px;
+}
+
+.header-nav-list {
+    font-size: 1rem;
+}
+
+.header-nav-list li {
+    margin-right: 20px;
+}
+
+.header-nav-list li a {
+    color: #fff;
+    text-decoration: none;
+    padding-bottom: 5px;
+    transition: color 0.3s ease;
+}
+
+.header-nav-list li a:hover {
+    color: #ffc107;
+}
+
+.header-actions .btn-outline-dreamblue {
+    color: #5B6CFF;
+    border-color: #5B6CFF;
+}
+
+.header-actions .btn-outline-dreamblue:hover {
+    background-color: #5B6CFF;
+    color: #ffffff;
+}
+
+.header-search-form {
+    width: 200px;
+}
+
+.header-search-input {
+    padding-right: 40px;
+    font-size: 16px;
+    box-shadow: none;
+    border-color: #e0e0e0;
+    height: 45px;
+}
+
+.header-search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar-toggler {
+    border: none;
+    color: white;
+}
+
+.header-nav-list-mobile {
+    flex-grow: 0;
+}
+
+.header-nav-list-mobile li {
+    padding: 10px 0;
+}
+/* Đảm bảo navbar không hiện ngang và sẽ trượt từ trên xuống */
+.collapse {
+    position: absolute;
+    top: 100%; /* Đặt ngay dưới header */
+    left: 0;
+    width: 100%;
+    background-color: #101526;
+    transition: max-height 0.5s ease, visibility 0.5s ease;
+    max-height: 0; /* Bắt đầu với chiều cao bằng 0 để không hiển thị */
+    visibility: hidden;
+    overflow: hidden; /* Giúp tránh các phần tử bị tràn ra ngoài */
+    z-index: 999;
+}
+
+/* Khi mở, menu sẽ trượt xuống */
+.collapse.show {
+    max-height: 500px; /* Đặt chiều cao tối đa khi mở */
+    visibility: visible;
+}
+
+/* Tạo khoảng cách giữa các mục */
+.header-nav-list-mobile li {
+    padding: 15px 0;
+}
+
+.header-nav-list-mobile li a {
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header-nav-list-mobile li a:hover {
+    color: #ffc107;
+}
+
+/* Đảm bảo nút navbar-toggler không bị ảnh hưởng */
+.navbar-toggler {
+    color: white;
+    font-size: 24px;
+    border: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-nav {
+        display: none;
+    }
+
+    .collapse {
+        top: 100    px; /* Khoảng cách trên để menu không chồng lên header */
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header-search-form {
+        width: 100%;
+    }
+
+    .header-booking-btn,
+    .header-login-btn {
+        width: auto;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .header-booking-icon,
+    .header-login-icon {
+        font-size: 20px;
+    }
+}
+main{
+  margin-top: 115px;
+
+    background-color: #101E4B;
+color: white;
+
+}
+  
+  /* STYLES CHO FOOTER */
+/* Footer styling */
+.footer {
+  background: linear-gradient(106deg, #639, #36c 102.69%);
+  color: #fff;
+}
+.footer .row {
+  --bs-gutter-x: 0rem;
+}
+.footer-section {
+  margin-bottom: -16px;
+}
+
+.footer-col {
+  padding-top: 50px;
+  background-image: url(src/Img/mobile-blur-5.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.footer-heading {
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.footer-list {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-list li {
+  margin-bottom: 8px;
+}
+
+.footer-list a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-list a:hover {
+  color: #f1c40f; /* Change the hover color */
+}
+
+.footer-hotline {
+  height: 60px;
+  background-color: #03182B;
+  border-top-right-radius: 80px;
+  margin-top: 64px;
+}
+
+.footer-hotline i {
+  margin-right: 8px;
+}
+
+.footer-logo {
+  background-image: url(src/Img/mobile-blur-6.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.footer-logo h6 {
+  font-size: 30px;
+}
+.footer-logo .row {
+  height: 50%;
+  border-bottom-left-radius: 80px;
+  background-color: #03182B;
+  --bs-gutter-x: 0;
+}
+.footer-logo img {
+  height: 120px;
+}
+.fa-twitter{
+  margin-right: 50px;
+}
+.footer-company-info {
+  padding: 20px 32px;
+}
+
+.footer-social-icons a {
+  margin-right: 36px;
+  color: #fff;
+  font-size: 32px;
+}
+
+.footer-social-icons a:hover {
+  color: #f1c40f;
+}
+.mobile-footer {
+  display: none;
+}
+
+/* Hide desktop footer on mobile and show mobile footer */
+@media (max-width: 768px) {
+  .footer {
+    display: none; /* Hide desktop version */
+  }
+  .fa-twitter{
+  margin-right: 0 !important;
+ }
+ .twitter{
+  margin-right: 0 !important;
+ }
+  .mobile-footer {
+    display: block; /* Show mobile version */
+    background-image: url(src/Img/mobile-blur-6.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Mobile footer styles */
+  .mobile-footer .mobile-footer-logo img {
+    height: 120px;
+    margin-bottom: 16px;
+  }
+
+  .mobile-footer .footer-navigation {
+    margin-bottom: 16px;
+  }
+
+  .mobile-footer .footer-list {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .mobile-footer .footer-social-icons {
+    margin: 16px 0;
+  }
+
+  .mobile-footer .footer-company-info {
+    padding: 10px;
+  }
+
+  .mobile-footer .footer-company-info p {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,145 @@
+
+.aboutUs main{
+    padding-top: 50px;
+    padding-bottom: 200px;
+}
+.aboutUs .mission-title {
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #1e89cb;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: inherit;
+    animation: bounce 2s infinite;
+    /* Thêm hiệu ứng nhấp nhô */
+}
+
+/* Định nghĩa keyframe cho nhấp nhô */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+        /* Kích thước ban đầu */
+    }
+
+    50% {
+        transform: scale(1.25);
+        /* Phóng to lên 25% */
+    }
+}
+.aboutUs .carousel-inner{
+    display: flex;
+}
+.aboutUs .carousel-item{
+    width: 80%;
+    margin: 20px auto;
+    float: none;
+}
+.aboutUs .carousel-item img{
+    margin: auto;
+    height: 35rem;
+    object-fit: cover;
+}
+.aboutUs .container-carousel{
+    margin-top: 1rem;
+}
+.aboutUs .container-carousel h5{
+    font-size: 30px;
+}
+.aboutUs .carousel-dot{
+    margin-bottom: 20px;
+}
+.aboutUs .carousel-dot h5{
+    font-size: 30px;
+}
+.aboutUs .carousel-indicators{
+    margin-bottom: -2rem;
+}
+.aboutUs .text-center{
+    margin-top: 20px;
+}
+.aboutUs .contact-body{
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    margin-bottom: 2rem;
+    font-size: 40px;
+}
+.aboutUs .info-container {
+    height: 400px;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.aboutUs .info {
+    background: linear-gradient(90deg, rgba(38, 92, 240, 88%) 8%, rgba(104, 104, 240, 70%) 20%, rgba(255, 255, 255, 0) 100%), url('../Img/rap/infoRap.png');
+    background-repeat: no-repeat;
+    height: 100%;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.aboutUs .info h1 {
+    color: gold;
+    font-size: 40px;
+}
+
+.aboutUs .address,
+.aboutUs .email,
+.aboutUs .phone {
+    font-size: 20px;
+    margin: 10px 0;
+    color: #f8fafc;
+}
+
+.aboutUs .row {
+    display: flex;
+    /* Sử dụng flexbox để chia đều */
+    justify-content: space-between;
+    /* Khoảng cách đều giữa các phần tử */
+}
+
+.aboutUs .info-box {
+    background-color: #343a40;
+    padding: 1rem;
+    margin: 2rem;
+    border-radius: 5px;
+    text-align: center;
+    border: 5px solid #0056b3;
+    position: relative;
+    height: 70%;
+}
+
+.aboutUs .info-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 86, 179, 0.5);
+    border-radius: 5px;
+    z-index: -1;
+}
+
+.aboutUs .text-yellow {
+    color: #f39c12;
+    /* Màu vàng */
+}
+
+.aboutUs .description {
+    display: block;
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.aboutUs .margin-left-right-2 {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+}

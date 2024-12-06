@@ -1,0 +1,172 @@
+.movielist .movieList-container {
+  background-color: #101E4B;
+  color: white;
+}
+
+.movielist .movieList-header {
+  margin-bottom: 20px;
+}
+
+.movielist .movieList-title {
+  font-size: 38px;
+  font-weight: 900;
+  margin-left: 6rem;
+  padding-top: 2rem;
+  text-decoration: none;
+  transition: all 0.3s ease; /* Thêm transition để có hiệu ứng mượt */
+  border-bottom: 2px solid transparent; /* Thêm gạch dưới trong suốt */
+}
+.movielist .movieList-title:hover{
+  color: orange;
+  transform: scale(1.05); /* Chữ to lên nhẹ */
+  border-bottom: 2px solid orange; /* Gạch dưới hiện ra khi hover */
+  cursor: pointer;
+}
+
+.movielist .movieList-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 2rem;
+  padding-bottom: 3rem;
+}
+
+.movielist .movieList-item {
+  position: relative;
+  width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: start;
+  transition: transform 0.3s;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.movielist .movieList-item:hover {
+  transform: scale(1.05);
+}
+
+.movielist .movieList-item-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.movielist .movieList-item-image {
+  width: 100%;
+  height: 450px;
+  border-radius: 10px;
+}
+
+.movielist .card-movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* Đảm bảo khoảng cách đều nhau giữa các phần */
+  height: 100%;
+}
+
+.movielist .card-title {
+  min-height: 80px;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+.movielist .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.movielist .movieList-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Dark overlay */
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.movielist .movieList-item:hover .movieList-overlay {
+  opacity: 1;
+  /* Show overlay on hover */
+}
+
+.movielist .movieList-info {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.movielist .movieList-info li {
+  margin: 5px 0;
+}
+
+.movielist .movieList-item-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.movielist .movieList-item-footer {
+  font-size: 20px;
+  margin: 15px 0;
+}
+
+.movielist .movieList-item-actions {
+  margin-top: 10px;
+}
+
+.movielist .movieList-item-trailer {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}
+
+
+.movielist .movieList-pagination{
+  margin-top: 2rem;
+}
+
+.movielist .movieList-item-btn {
+  height: 40px;
+  width: 150px;
+}
+
+.movielist .custom-btn-prev,
+.movielist .custom-btn-next {
+    background-color: transparent;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right:2rem;
+    margin-left: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi */
+}
+
+.movielist .custom-btn-prev:hover,
+.movielist .custom-btn-next:hover {
+    background-color: #0056b3; /* Màu nền khi hover */
+    color: white; /* Màu chữ khi hover */
+}
+
+

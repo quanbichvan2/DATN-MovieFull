@@ -1,0 +1,774 @@
+body{
+    background-color: #0a0f24;
+}
+
+.homepage .banner-carousel {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.homepage .banner-carousel-img {
+    max-width: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    /* Tạo góc bo tròn cho ảnh banner */
+}
+
+.homepage .carousel-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.homepage .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Thêm hiệu ứng trượt */
+}
+.homepage .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    /* Điều chỉnh vị trí của các dots */
+    left: 35%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+}
+
+.homepage .carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.homepage .carousel-indicators .active {
+    background-color: #fff;
+}
+
+.homepage .carousel-control-prev,
+.homepage .carousel-control-next {
+    width: 5%;
+}
+
+.homepage .carousel-control-prev-icon,
+.homepage .carousel-control-next-icon {
+    border-radius: 50%;
+}
+
+.homepage main {
+    background-color: #0f172a;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: 115px;
+    width: 100%;
+}
+
+
+
+.homepage .carousel-indicators {
+    position: absolute;
+    bottom: 10px; /* Điều chỉnh vị trí của các dots */
+    left: 35%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+  }
+  
+  .homepage .carousel-indicators li {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .homepage .carousel-indicators .active {
+    background-color: #fff;
+  }
+  .homepage .carousel-container {
+    max-width: 90%;
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Prevent overflow */
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .homepage #carousel {
+    display: flex;
+    overflow: hidden; /* Hide overflow items */
+    width: 100%;
+  }
+  
+  .homepage .movie-item {
+    flex: 1 0 25%; /* 1 means it can grow, 0 means no shrink, 21% is its base width */
+    min-width: 300px; /* Set a minimum width to maintain proper sizing */
+    max-width: 340px; /* Ensure the items don’t get too large */
+    transition: transform 3s ease; /* Smooth transition effect */
+    margin-right: 20px;
+
+  }
+  .homepage #icon1, .homepage #icon2 {
+    cursor: pointer;
+  }
+  .homepage .movie-item{
+    margin-right: 35px;
+  }
+  .homepage .movie-img-container {
+    position: relative;
+    width: 340px;
+    height: 510px;
+    overflow: hidden;
+  }
+  .homepage .slick-list{
+    padding-left: 8px;
+  }
+  .homepage .slick-slider{
+    
+    margin-left: 24px;
+
+  }
+
+  .slick-prev:before, .slick-next:before {
+    font-family: 'slick'; /* Giữ nguyên font family của slick */
+    font-size: 36px !important; /* Tăng kích thước font, ví dụ là 30px */
+    line-height: 1;
+    opacity: .75;
+    color: white; /* Màu sắc của nút điều hướng */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+  .homepage .btn-readmore{
+    display: flex; justify-content: center; margin-top: 2rem;
+  }
+  .homepage .buyticketbtn-movie-item{
+    height:40px;width: 10rem;
+  }
+  .homepage .btn-movie-item{
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+  }
+  .homepage .Trailerbtn-movie-item{
+    color: white; display: flex; align-items: center; text-decoration: none;height:40px;
+  }
+  .homepage .Trailerbtn-movie-item i{
+    height:40px;margin-bottom:-15px;font-size: 24px; margin-right: 10px;
+  }
+  
+  .homepage .movie-poster {
+   width: 340px; 
+   height: 510px;
+    transition: transform 0.5s ease; /* Hiệu ứng nhẹ khi hover */
+  }
+  
+  .homepage .movie-img-container:hover .movie-poster {
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+  }
+  .homepage .movie-info {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out; /* Thêm hiệu ứng mượt mà */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10; /* Đảm bảo overlay nằm trên ảnh */
+  }
+  .homepage .movie-item:hover .movie-info {
+    opacity:1; /* Show movie info on hover */
+  }
+  .homepage .stars{
+    display: flex;
+  }
+  .homepage .star-container{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+  .homepage .star-icon {
+    width: 50px;
+    height: 50px;
+}
+.homepage #icon1,.homepage #icon2{
+    color: white;
+    font-size: 40px;
+}
+.homepage #upComing-icon1,.homepage #upComing-icon2{
+    color: white;
+    font-size: 40px;
+}
+.homepage .section-title-Movie {
+    text-align: center;
+    margin: 10px 0;
+    color: white;
+    position: relative;
+    text-shadow: 
+    2px 2px 0 #f39c12, /* viền bên phải dưới */
+    -2px -2px 0 #f39c12, /* viền bên trái trên */
+    -2px 2px 0 #f39c12, /* viền bên trái dưới */
+    2px -2px 0 #f39c12, /* viền bên phải trên */
+    2px 0px 0 #f39c12, /* viền bên phải */
+    -2px 0px 0 #f39c12, /* viền bên trái */
+    0px 2px 0 #f39c12, /* viền bên dưới */
+    0px -2px 0 #f39c12; /* viền bên trên */
+}
+
+.homepage .movieUpComing-carousel-container {
+    max-width: 90%;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+  
+  .homepage .movieUpComing-item {
+    flex: 1 0 21%;
+    min-width: 300px;
+    max-width: 340px;
+    transition: transform 0.3s ease;
+    margin-right: 35px;
+  }
+  
+  .homepage .movieUpComing-img-container {
+    position: relative;
+    width: 340px;
+    height: 510px;
+    overflow: hidden;
+  }
+  
+  .homepage .movieUpComing-poster {
+    width: 340px;
+    height: 510px;
+    transition: transform 0.5s ease;
+  }
+  
+  .homepage .movieUpComing-img-container:hover .movieUpComing-poster {
+    transform: scale(1.05);
+  }
+  
+  .homepage .movieUpComing-info {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+  
+  .homepage .movieUpComing-item:hover .movieUpComing-info {
+    opacity: 1;
+  }
+  
+  .homepage .btn-movieUpComing-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .homepage .buyticketbtn-movieUpComing-item {
+    height: 40px;
+    width: 10rem;
+  }
+  
+  .homepage .Trailerbtn-movieUpComing-item {
+    color: white;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    height: 40px;
+  }
+  
+  .homepage .Trailerbtn-movieUpComing-item i {
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+
+  
+.homepage .promotion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.homepage .promotion-body {
+    padding: 44px 0;
+    border-radius: 10px;
+}
+
+.homepage .promotion-images {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    margin-inline: 10rem;
+}
+
+.homepage .promotion-card {
+    border-radius: 10px;
+    transition: transform 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    width:400px;
+}
+
+.homepage .promotion-card:hover {
+    transform: scale(1.05);
+}
+
+.homepage .promotion-card img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s;
+}
+.homepage .sec-memb{
+  position: relative;
+  z-index: 5;
+}
+.homepage .promotion-card:hover img {
+    transform: scale(1.05);
+}
+.homepage .sec-pd{
+    margin: 0 auto;
+    position: relative;
+    padding: 200px 50px 250px 50px;
+    overflow: hidden;
+
+  }
+  
+  .homepage .sec-pd::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://cinestar.com.vn/_next/image/?url=%2Fassets%2Fimages%2Fbg-cfriends.webp&w=1920&q=75");
+    background-size: cover;
+    background-position: center;
+    filter:  blur(10px);
+    /* Adjust the blur level here */
+    z-index: 3;
+
+
+  }
+  
+  
+  .homepage .sec-heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .homepage .sec-heading h2 {
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: #fff;
+  }
+  
+  .homepage .memb-slider {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+  }
+  
+  .homepage .memb-wr {
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease-in-out;
+    width: calc(33.33% - 20px);
+    /* Three cards on a row */
+  
+  }
+  
+  .homepage .memb-wr:hover {
+    transform: scale(1.05);
+    /* zoom effect on hover */
+  }
+  
+  .homepage .memb-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.6);
+    /* Initial soft glow effect */
+    transition: box-shadow 0.4s ease;
+    /* Smooth transition effect */
+  }
+  
+  .homepage .memb-img img:hover {
+    box-shadow: 0 0 30px rgba(255, 255, 0, 1), 0 0 60px rgba(255, 255, 0, 0.7);
+    /* Stronger glow when hovered */
+  }
+  
+  .homepage .memb-content {
+    text-align: start;
+    margin-top: 15px;
+    color: #fff;
+  }
+  
+  .homepage .memb-name {
+    font-size: 22px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  .homepage .memb-des {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .homepage .btn--pri {
+    background-color: #fdda33;
+    /* Matching the "Tìm hiểu ngay" button with yellow background */
+    color: #000;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .homepage .btn--pri:hover {
+    background-color: #e5c31d;
+    /* Darker shade on hover */
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .homepage .memb-content a {
+    text-decoration: none;
+    color: #fff;
+    /* Yellow heading color */
+  
+  }
+
+  /* Media Query for responsive behavior */
+  @media (max-width: 768px) {
+    .homepage .memb-slider {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .homepage .movieUpComing-img-container {
+      position: relative;
+      width: 170px;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .homepage .memb-wr {
+        width: 100%;
+        /* Full width for mobile view */
+    }
+  
+    .homepage .sec-heading h2 {
+        font-size: 24px;
+    }
+  
+    .homepage .memb-name {
+        font-size: 18px;
+    }
+  
+    .homepage .btn--pri {
+        padding: 8px 16px;
+    }
+  }
+  
+  .homepage .ct-social {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 47rem;
+  }
+  .homepage .ct-social-link {
+    align-items: center;
+    display: flex;
+    font-size: 3.6rem;
+    text-transform: uppercase;}
+    .homepage .ct-social-link img {
+      width: 18rem;
+  }
+  .homepage .ct-social-link .txt {
+    --mn: 4rem;
+    display: inline-block;
+    flex: 1;
+    letter-spacing: .1rem;
+    padding: 2.4rem;
+    position: relative;
+    text-align: center;
+    font-size: 28px;
+    color: white;
+  }
+  .homepage .ct-social-link .txt span {
+    --mn: 6rem;
+    display: inline-block;
+    flex: 1;
+    letter-spacing: .18rem;
+    padding: 1.56rem;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+  }
+  .homepage .ct-social-link:nth-child(2n) {
+    flex-direction: row-reverse;
+  }
+  .homepage .ct-social-link .txt:before {
+    background: linear-gradient(106deg, #639, #36c 102.69%);
+    border-radius: .8rem;
+    content: "";
+    height: 100%;
+    left: calc(var(--mn)* -2);
+    position: absolute;
+    right: 160px;
+    top: 0;
+    z-index: -1;
+  }
+  
+  .homepage .ct-box {
+    background: rgba(51, 102, 204, .8);
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 4rem;
+  }
+  .homepage .ct-box .heading {
+    font-size: 2.4rem;
+  }
+  
+  .homepage .heading {
+    color: #f8fafc;
+    font-size: 4rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+  }
+  .homepage .ct-tt {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .homepage .ct-tt a {
+    text-decoration: none !important;
+    color: #FFFFFF;
+  }
+  
+  .homepage ol, .homepage ul {
+    list-style: none;
+  }
+  .homepage .ct-tt li {
+    display: flex;
+    gap: 1rem;
+  }
+  .homepage .ct-tt li img {
+    width: 2.4rem;
+  }
+  .homepage .ct-tt li a {
+    flex: 1;
+  }
+  
+  .homepage .mb-input {
+    margin-bottom: 12px;
+  }
+  .homepage .w-full {
+    width: 100%;
+  }
+  .homepage .relative {
+    position: relative;
+  }
+  .homepage .ct-form .re-input {
+    border-radius: .4rem;
+    width: 100%;
+  }
+  
+  .homepage .re-input {
+    background-color: #fff;
+    border: none;
+    color: #475569;
+    font-size: 1.6rem;
+    outline: none;
+    padding: 1.4rem;
+  }
+  .homepage .ct-form .btn {
+    margin-top: 2.4rem;
+    min-width: 23rem;
+  }
+  .homepage .btn--pri {
+    color: #0f172a;
+    position: relative;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+  }
+  .homepage .btn--pri:before {
+    background: #f3ea28;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: -2;
+  }
+  
+  .homepage .btn--pri:after, .homepage .btn--pri:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    transition: all .4s ease-in-out;
+    width: .1rem;
+  }
+  .homepage .btn--pri:after {
+    background: linear-gradient(106deg, #639, #36c 102.69%);
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    width: 0;
+    z-index: -1;
+  }
+  
+  .homepage .btn--pri:after, .homepage .btn--pri:before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    transition: all .4s ease-in-out;
+    width: .1rem;
+  }
+  .homepage .ct-social-link:nth-child(2n) .txt:before {
+    left: 60px;
+    right: calc(var(--mn)* -2);
+  }
+  .homepage .star-container h1{
+    font-size: 48px;
+}
+.homepage .promotion-images .icon{
+    font-size: 48px;
+  }
+  .slick-next{
+    right: 10px !important;
+  }
+  .sec-ct-mb{
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .homepage .section-title-Movie {
+        text-align: center;
+        margin: 10px 0;
+        color: white;
+        position: relative;
+        text-shadow: 
+        1px 1px 0 #f39c12, /* viền bên phải dưới */
+    }
+    .homepage .star-icon {
+        width: 16px;
+        height: 16px;
+    }
+    .homepage .star-container h1{
+        font-size: 24px;
+    }
+    .homepage .movieSelectionBody .section-title-Movie{
+        font-size: 24px
+    }
+    .homepage .promotion-images {
+        margin-inline: 1rem; /* Reduce the margin for smaller screens */
+        gap: 10px;
+         /* Reduce the gap between images */
+      }
+      .homepage .promotion-images .icon{
+        display: none;
+      }
+      .homepage .movie-info {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out; /* Thêm hiệu ứng mượt mà */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 170px;
+        height: 250px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10; /* Đảm bảo overlay nằm trên ảnh */
+        font-size: 12px;
+      }
+      .homepage .movie-img-container {
+        position: relative;
+        width: 170px;
+        height: 250px;
+        overflow: hidden;
+      }
+      .homepage .movie-item {
+        flex: 1 0 25%; /* 1 means it can grow, 0 means no shrink, 21% is its base width */
+        min-width: 150px; /* Set a minimum width to maintain proper sizing */
+        max-width: 170px; /* Ensure the items don’t get too large */
+        transition: transform 3s ease; /* Smooth transition effect */
+        margin-right: 20px;
+    
+      }
+      .homepage .movie-info-title{
+        min-height: 50px;
+      }
+      .homepage .movie-img-container img {
+        width: 170px !important;
+        height: 250px !important;
+      }
+      .sec-ct-mb{
+        display: block;
+      }
+      .sec-ct{
+        display: none;
+      }
+
+      .homepage .ct-box {
+        background: rgba(51, 102, 204, .8);
+        border-radius: .5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding: 20px;
+      }
+      .homepage .ct-box .heading {
+        font-size: 2rem;
+        margin-top: 20px;
+      }
+      
+      .homepage .ct-form .btn {
+        min-width: 16rem;
+      }
+  }
+
