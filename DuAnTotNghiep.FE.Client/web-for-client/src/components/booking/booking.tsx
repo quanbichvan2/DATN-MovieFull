@@ -150,28 +150,26 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         const seatType = seat.type;
         const isSeatSelected = seat.isSelected;
 
-        // Cập nhật số ghế đã chọn
         setSelectedSeats((prev) => {
             const updatedSeats = { ...prev };
 
-            // Nếu ghế chưa được chọn và số ghế chưa đạt tối đa
-            if (!isSeatSelected && selectedSeats[seatType] < maxSeats[seatType]) {
-                // Nếu ghế đôi, cộng 2 ghế vào, nếu không thì cộng 1 ghế
+            // Kiểm tra và xử lý số lượng ghế khi click vào ghế thường và ghế đôi
+            if (!isSeatSelected && updatedSeats[seatType] < maxSeats[seatType]) {
+                // Ghế đôi cộng 2 ghế vào, ghế thường cộng 1
                 updatedSeats[seatType] += (seatType === "couple" ? 2 : 1);
             } else if (isSeatSelected) {
-                // Nếu ghế đã được chọn, giảm số ghế đã chọn
+                // Nếu ghế đã chọn, giảm số ghế
                 updatedSeats[seatType] -= (seatType === "couple" ? 2 : 1);
             }
 
             return updatedSeats;
         });
 
-        // Cập nhật trạng thái ghế trong sơ đồ ghế
         setSeatDiagram((prev) => {
             const updatedDiagram = [...prev];
             const selectedSeat = updatedDiagram[rowIndex].seats[seatIndex];
 
-            // Nếu là ghế đôi, chọn cả 2 ghế liền kề
+            // Xử lý ghế đôi (chỉ thay đổi trạng thái cho ghế đầu của cặp ghế)
             if (seatType === "couple" && seatIndex < updatedDiagram[rowIndex].seats.length - 1) {
                 updatedDiagram[rowIndex].seats[seatIndex].isSelected = !isSeatSelected;
                 updatedDiagram[rowIndex].seats[seatIndex + 1].isSelected = !isSeatSelected;
@@ -184,14 +182,24 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     };
 
     const handleTicketSelection = (type: "regular" | "vip" | "couple", increment: number) => {
-        const updatedSeats = {
-            ...selectedSeats,
-            [type]: Math.max(0, selectedSeats[type] + (type === "couple" ? increment * 2 : increment)), // Đảm bảo ghế đôi là bội số của 2
-        };
+        const updatedSeats = { ...selectedSeats };
 
-        // Cập nhật state số ghế đã chọn
+        if (type === "couple") {
+            if (updatedSeats[type] + increment * 2 >= 0) {
+                updatedSeats[type] += increment * 2;
+            }
+        } else {
+            if (updatedSeats[type] + increment >= 0) {
+                updatedSeats[type] += increment;
+            }
+        }
+
         setSelectedSeats(updatedSeats);
     };
+    
+
+
+
 
 
     const handleSubmit = () => {
@@ -275,6 +283,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                             -
                                         </button>
                                         <span style={{ margin: "0 10px" }}>
+
                                             {seatType.name === "Ghế đôi"
                                                 ? selectedSeats[seatType.type] / 2 // Hiển thị số lượng ghế đôi đã chọn
                                                 : selectedSeats[seatType.type]}  {/* Hiển thị số ghế đã chọn */}
@@ -290,6 +299,8 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                             )
                         )}
                     </div>
+
+
                     {/* <div className="d-flex justify-content-around mb-4">
                         {["regular", "vip", "couple"].map((type) => (
                             <div className="ticket-box text-light p-3" style={{ minWidth: "400px" }} key={type}>
@@ -364,7 +375,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                             title={seatClass.includes("coupled") ? seatContent : seat.seatNumber} // Thêm tiêu đề
                                             onClick={() => handleSelectSeat(seat, rowIndex, seatIndex)}
                                         >
-                                            {seatClass.includes("coupled") ? seatContent : seat.seatNumber} {/* Hiển thị nội dung */}
+                                            {seatClass.includes("coupled") ? seatContent : seat.seatNumber}
                                         </span>
                                     );
                                 })}
