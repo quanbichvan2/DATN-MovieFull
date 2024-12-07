@@ -256,9 +256,8 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 <div>
                     <h2>Chọn Loại Vé</h2>
                     <div className="d-flex justify-content-around mb-4">
-                        {seatTypes.map((seatType) => {
-                           
-                            return (
+                        {seatTypes.map((seatType) =>
+                            (
                                 <div key={seatType.id} className="ticket-box text-light p-3" style={{ minWidth: "400px" }}>
                                     <h4>{seatType.name}</h4> {/* Tên loại ghế */}
                                     <p style={{ color: "yellow", textTransform: "uppercase", fontWeight: "bold" }}>
@@ -288,8 +287,8 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                         </button>
                                     </div>
                                 </div>
-                            );
-                        })}
+                            )
+                        )}
                     </div>
                     {/* <div className="d-flex justify-content-around mb-4">
                         {["regular", "vip", "couple"].map((type) => (
