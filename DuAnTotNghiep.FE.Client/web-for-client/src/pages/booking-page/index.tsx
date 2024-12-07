@@ -49,6 +49,7 @@ const BookingPage: React.FC = () => {
           console.log(movieId)
           // Fetch shows (suất chiếu) for the movie
           const showsData = await showService.getShowsByMovieId(movieId);
+          console.log('#1', showsData);
           setShows(showsData);
           console.log(showsData)
         } catch (error) {

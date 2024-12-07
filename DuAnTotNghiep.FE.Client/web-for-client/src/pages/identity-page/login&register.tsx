@@ -1,8 +1,8 @@
 import "../../assets/css/authencation.prefixed.css";
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { login } from "../../service/identityService"
-import { register } from "../../service/identityService"
+import { login } from "../../services/identityService"
+import { register } from "../../services/identityService"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const AuthencationPage = () => {
