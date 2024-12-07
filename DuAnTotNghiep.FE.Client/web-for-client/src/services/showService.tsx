@@ -1,6 +1,4 @@
 import baseApi from "../apis/base";
-import axios from "axios";
-import { Show } from "../models/show";
 
 const showService = {
     getShows: async () => {

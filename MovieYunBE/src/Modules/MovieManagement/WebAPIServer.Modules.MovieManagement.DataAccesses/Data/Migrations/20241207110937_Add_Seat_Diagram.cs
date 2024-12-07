@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class Add_Seat_Diagram : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -155,12 +155,7 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    SeatPosition = table.Column<string>(type: "text", nullable: false),
-                    SeatRow = table.Column<byte>(type: "smallint", nullable: false),
-                    SeatColumn = table.Column<byte>(type: "smallint", nullable: false),
-                    SeatTypeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    SeatTypeName = table.Column<string>(type: "text", nullable: false),
-                    SeatTypePrice = table.Column<double>(type: "double precision", nullable: false),
+                    Diagram = table.Column<string>(type: "text", nullable: true),
                     HallId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
@@ -260,7 +255,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     StartTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     CinemaHallId = table.Column<Guid>(type: "uuid", nullable: false),
                     MovieId = table.Column<Guid>(type: "uuid", nullable: false),
-                    //MovieRuntimeMinutes = table.Column<long>(type: "smallint", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),

@@ -5,14 +5,7 @@ namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
 {
     public class Seat : BaseAuditableEntity
     {
-        public string SeatPosition { get; set; } = default!;
-        public byte SeatRow { get; set; }
-        public byte SeatColumn { get; set; }
-
-        [ForeignKey("SeatType")]
-        public Guid SeatTypeId { get; set; }
-        public string SeatTypeName { get; set; } = default!;
-        public double SeatTypePrice { get; set; }
+        public string? Diagram { get; set; }
 
         [ForeignKey("Hall")]
         public Guid HallId { get; set; }

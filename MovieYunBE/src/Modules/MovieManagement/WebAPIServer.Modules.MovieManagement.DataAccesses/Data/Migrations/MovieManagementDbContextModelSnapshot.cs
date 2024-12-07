@@ -332,6 +332,9 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<string>("Diagram")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("HallId")
                         .HasColumnType("uuid");
 
@@ -346,26 +349,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
-
-                    b.Property<byte>("SeatColumn")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("SeatPosition")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<byte>("SeatRow")
-                        .HasColumnType("smallint");
-
-                    b.Property<Guid>("SeatTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("SeatTypeName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("SeatTypePrice")
-                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -419,21 +402,10 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<Guid>("CinemaHallId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CinemaName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
-                        .HasColumnType("text");
-
-                    b.Property<DateTimeOffset>("EndTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("HallName")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActived")
@@ -450,17 +422,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 
                     b.Property<Guid>("MovieId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("MoviePosterImage")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<byte>("MovieRuntimeMinutes")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("MovieTitle")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("StartTime")
                         .HasColumnType("timestamp with time zone");

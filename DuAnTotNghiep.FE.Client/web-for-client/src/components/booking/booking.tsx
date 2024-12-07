@@ -12,6 +12,7 @@ import { SnackComponent } from "./snack";
 
 import { Link } from "react-router-dom";
 import { SeatTypeDTO } from "../../models/seat";
+import hallService from "../../services/hallService";
 // import { useSeatsTypeQuerry } from "../../hooks/useSeatType";
 interface Seat {
     seatNumber: string;
@@ -27,16 +28,13 @@ interface Row {
     seats: Seat[];
 }
 
-// interface Day {
-//     date: string;
-//     times: string[];
-// }
+
 interface BookingComponentProps {
     shows: Show | undefined;
     // movie: Movie
 
 }
-// const BookingComponent: React.FC<BookingComponentProps> = ({ shows, movie }) => {
+
 const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [selectedTime, setSelectedTime] = useState<string | null>(null);
     const [seatDiagram, setSeatDiagram] = useState<Row[]>([]);
@@ -55,10 +53,17 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
 
     const [seatTypes, setSeatTypes] = useState<SeatTypeDTO[]>([]);
     const [maxSeats, setMaxSeats] = useState({ regular: 90, vip: 0, couple: 10 });
-    // const handleSelectShow(test: Show) => {
-    //     setSelectedDay(test.startTime)
-    // }
-    // const { data, isLoading } = useSeatsTypeQuerry();
+
+    const [hallId, setHallId] = useState<string>("");
+
+    const loadSeatDiagam = async () => {
+        if (hallId == "") return;
+        const hallData = await hallService.getHallById(hallId);
+        console.log('#2', hallData);
+        const diagramData = JSON.parse(hallData.seats[0].diagram);
+        console.log('#4', diagramData);
+        setSeatDiagram(diagramData);
+    }
 
     useEffect(() => {
         if (selectedTime) {
@@ -74,6 +79,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             setSeatDiagram(processedSeatDiagram);
         }
     }, [selectedTime]);
+
     useEffect(() => {
         const fetchSeats = async () => {
             if (!selectedTime) return;
@@ -103,9 +109,11 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 const productsData = await productService.getProducts();
                 const categoriesData = await categoryService.getCategories();
                 const seatTypeData = await seatService.getAllSeatsType();
+                
                 setProducts(productsData);
                 setCategories(categoriesData); // Chuyển đổi thành instance của Category
                 setSeatTypes(seatTypeData);
+
             } catch (err) {
                 setError("Failed to fetch data");
                 console.error(err);
@@ -116,6 +124,10 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        loadSeatDiagam();
+    }, [hallId])
 
     const filterProductsByCategory = (categoryName: string) => {
         const category = categories.find(cate => cate.name.toLowerCase() === categoryName.toLowerCase());
@@ -135,10 +147,13 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
 
-    const handleSelectDay = (day: ListTime) => {
+    const handleSelectDay = (day: ListTime, hallId: string) => {
         setSelectedDay(day);
         // setSelectedTime(null);
         setAvailableTimes(day.showTimes.map((showTime) => showTime.time));
+        console.log('#3', hallId);
+        setHallId(hallId);
+        
         setSeatDiagram([]);
     };
 
@@ -234,7 +249,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                     <button
                                         className="btn btn-outline-warning date-btn mb-2"
                                         key={index}
-                                        onClick={() => handleSelectDay(time)}
+                                        onClick={() => handleSelectDay(time, hall.hallId)}
                                     >
                                         {time.startTime}
                                     </button>
