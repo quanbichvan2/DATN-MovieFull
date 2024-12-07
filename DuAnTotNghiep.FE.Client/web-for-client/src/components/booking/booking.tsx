@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import seatDiagramData from "../../assets/seatDiagram.json";
-import showService from "../../services/showService";
+
 import seatService from "../../services/seatService";
 import productService from "../../services/productService";
 import categoryService from "../../services/categoryService";
 import { Product } from "../../models/product";
 import { Category } from "../../models/category";
 import { ListTime, Show } from '../../models/show';
-import { getFormattedDate, getDayOfWeek, formatCurrency } from "./ulti";
+
 import { SnackComponent } from "./snack";
-import { Movie } from "../../models/movieDetail";
+
 import { Link } from "react-router-dom";
-import { SeatType } from "../../models/seat";
+import { SeatTypeDTO } from "../../models/seat";
 // import { useSeatsTypeQuerry } from "../../hooks/useSeatType";
 interface Seat {
     seatNumber: string;
@@ -53,7 +53,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [selectedDay, setSelectedDay] = useState<ListTime | null>();
     const [availableTimes, setAvailableTimes] = useState<string[]>([]);
 
-    const [seatTypes, setSeatTypes] = useState<SeatType[]>([]);
+    const [seatTypes, setSeatTypes] = useState<SeatTypeDTO[]>([]);
     const [maxSeats, setMaxSeats] = useState({ regular: 90, vip: 0, couple: 10 });
     // const handleSelectShow(test: Show) => {
     //     setSelectedDay(test.startTime)
@@ -183,8 +183,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         });
     };
 
-
-
     const handleTicketSelection = (type: "regular" | "vip" | "couple", increment: number) => {
         const updatedSeats = {
             ...selectedSeats,
@@ -206,19 +204,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             alert("Bạn chưa mua đủ loại ghế.");
         }
     };
-
-    // const getDayOfWeek = (dateString: string) => {
-    //     const daysOfWeek = ["Chủ Nhật", "Thứ Hai", "Thứ Ba", "Thứ Tư", "Thứ Năm", "Thứ Sáu", "Thứ Bảy"];
-    //     const date = new Date(dateString);
-    //     return daysOfWeek[date.getDay()];
-    // };
-
-    // const formatDate = (dateString: string) => {
-    //     const date = new Date(dateString);
-    //     const day = String(date.getDate()).padStart(2, "0");
-    //     const month = String(date.getMonth() + 1).padStart(2, "0");
-    //     return `${day}/${month}`;
-    // };
 
     return (
         <div className="container" style={{ paddingTop: "80px" }}>
@@ -272,32 +257,32 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                     <h2>Chọn Loại Vé</h2>
                     <div className="d-flex justify-content-around mb-4">
                         {seatTypes.map((seatType) => {
-                            // Xác định loại ghế (regular, vip, couple) từ name
-                            const seatTypeKey: "regular" | "vip" | "couple" =
-                                seatType.name === "Ghế VIP" ? "vip" :
-                                    seatType.name === "Ghế đôi" ? "couple" : "regular";
-
+                           
                             return (
                                 <div key={seatType.id} className="ticket-box text-light p-3" style={{ minWidth: "400px" }}>
                                     <h4>{seatType.name}</h4> {/* Tên loại ghế */}
+                                    <p style={{ color: "yellow", textTransform: "uppercase", fontWeight: "bold" }}>
+                                        {seatType.type === "regular" ? "Đơn" : seatType.type === "vip" ? "Đơn" : "Đôi"}
+                                    </p>
+
                                     <p>{seatType.price.toLocaleString()} VND</p> {/* Giá loại ghế */}
 
                                     {/* Điều chỉnh số lượng ghế */}
                                     <div className="d-flex align-items-center">
                                         <button
                                             className="btn btn-outline-secondary"
-                                            onClick={() => handleTicketSelection(seatTypeKey, -1)} // Giảm số lượng ghế
+                                            onClick={() => handleTicketSelection(seatType.type, -1)} // Giảm số lượng ghế
                                         >
                                             -
                                         </button>
                                         <span style={{ margin: "0 10px" }}>
                                             {seatType.name === "Ghế đôi"
-                                                ? selectedSeats[seatTypeKey] / 2 // Hiển thị số lượng ghế đôi đã chọn
-                                                : selectedSeats[seatTypeKey]}  {/* Hiển thị số ghế đã chọn */}
+                                                ? selectedSeats[seatType.type] / 2 // Hiển thị số lượng ghế đôi đã chọn
+                                                : selectedSeats[seatType.type]}  {/* Hiển thị số ghế đã chọn */}
                                         </span>
                                         <button
                                             className="btn btn-outline-secondary"
-                                            onClick={() => handleTicketSelection(seatTypeKey, 1)} // Tăng số lượng ghế
+                                            onClick={() => handleTicketSelection(seatType.type, 1)} // Tăng số lượng ghế
                                         >
                                             +
                                         </button>

@@ -22,9 +22,12 @@ const seatService = {
     getAllSeatsType: async (): Promise<SeatType[]> => {
         try {
             const response = await baseApi.get('/movie-management-module/SeatTypes');
-            console.log(response.data);
+            return response.data.map((item: any) => {
+                return {
+                    ...item, type: item.name === "Ghế thường" ? "regular" : (item.name === "Ghế VIP" ? "vip" : "couple")
 
-            return response.data;
+                };
+            });
         } catch (error) {
             console.error('Error fetching seats:', error);
             throw error;
