@@ -2,7 +2,7 @@ export interface Show {
   id:                  string;
   movieTitle:          string;
   genres:              Genre[];
-  listHall:            ListHall[];
+  listHall:            Hall[];
   movieRuntimeMinutes: number;
   moviePosterImage:    string;
   ageRating:           number;
@@ -14,7 +14,7 @@ export interface Genre {
   name: string;
 }
 
-export interface ListHall {
+export interface Hall {
   hallId:   string;
   hallName: string;
   listTime: ListTime[];

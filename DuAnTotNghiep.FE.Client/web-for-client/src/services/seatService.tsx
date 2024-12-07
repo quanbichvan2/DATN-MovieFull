@@ -1,17 +1,15 @@
 import baseApi from "../apis/base";
 import { SeatType, SeatTypeDTO } from "../models/seat";
 const seatService = {
-    getSeats: async () => {
+    getSeats: async (hallId : string) => {
         try {
-            const response = await baseApi.get('seat-module/Seats', {
+            const response = await baseApi.get<SeatType[]>(`/movie-management-module/Halls/${hallId}`, {
                 headers: {
                     Accept: "*/*"
                 }
             });
-
-            // Chuyển đổi từng ghế thành instance của SeatDTO
-            const seats = response.data.items.map((item: SeatType) => new SeatTypeDTO(item));
-            return seats;
+            console.log(response.data)
+            return response.data;
         } catch (error) {
             console.error("Error fetching seats:", error);
             throw error;

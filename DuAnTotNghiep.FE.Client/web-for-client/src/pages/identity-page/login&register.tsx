@@ -5,6 +5,8 @@ import { login } from "../../service/identityService"
 import { register } from "../../service/identityService"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+// import {registerService} from "../../services/identityService"
+
 const AuthencationPage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [loginData, setLoginData] = useState({ email: '', password: '' });
@@ -118,9 +120,9 @@ const AuthencationPage = () => {
                     email: registerData.email,
                     password: registerData.password,
                 };
-                await register(simplifiedRegisterData);
-                console.log("Đăng ký thành công:", simplifiedRegisterData);
+                const response = await register(simplifiedRegisterData);
                 toast.success("Đăng ký thành công!");
+                console.log("Đăng ký thành công:", response);
             } catch (error) {
                 console.error("Đăng ký thất bại:", error);
             }

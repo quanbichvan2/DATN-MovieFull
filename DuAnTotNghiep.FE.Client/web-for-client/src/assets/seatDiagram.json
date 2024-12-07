@@ -1,452 +1,704 @@
-[
-  {
-    "row": "A",
-    "seats": [
-      {
-        "seatNumber": "A1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "A10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "B",
-    "seats": [
-      {
-        "seatNumber": "B1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "B10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "C",
-    "seats": [
-      {
-        "seatNumber": "C1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "C10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "D",
-    "seats": [
-      {
-        "seatNumber": "D1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "D10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "E",
-    "seats": [
-      {
-        "seatNumber": "E1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "E10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "F",
-    "seats": [
-      {
-        "seatNumber": "F1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "F10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "G",
-    "seats": [
-      {
-        "seatNumber": "G1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "G10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "H",
-    "seats": [
-      {
-        "seatNumber": "H1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "H10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "I",
-    "seats": [
-      {
-        "seatNumber": "I1",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I2",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I3",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I4",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I5",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I6",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I7",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I8",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I9",
-        "type": "regular"
-      },
-      {
-        "seatNumber": "I10",
-        "type": "regular"
-      }
-    ]
-  },
-  {
-    "row": "J",
-    "seats": [
-      {
-        "seatNumber": "J1",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J2",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J3",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J4",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J5",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J6",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J7",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J8",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J9",
-        "type": "couple"
-      },
-      {
-        "seatNumber": "J10",
-        "type": "couple"
-      }
-    ]
-  }
-]
+{
+  "seats": [
+    {
+      "id": "9fe4f120-4c3c-46c2-b612-a47d4efcb7d7",
+      "seatPosition": "A01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "feb19652-cb86-40f2-9dac-5474efc071ed",
+      "seatPosition": "A02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "e41632b4-b8bf-481e-8e3f-a96c505acb2c",
+      "seatPosition": "A03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f358fff2-7ffb-4960-b30b-5355b9322ed2",
+      "seatPosition": "A04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "7d824dd5-5691-4385-b867-4cc1023a9573",
+      "seatPosition": "A05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "05a375b3-0327-4757-b628-8a5bc64ce5b6",
+      "seatPosition": "A06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "95ba3c45-6cec-4a27-82b3-80d047e3abc2",
+      "seatPosition": "A07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "27e6bb5b-87e5-4a18-8b1d-b8bf0111488a",
+      "seatPosition": "A08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "323e24f7-0d93-4cac-b5c3-9b6bb4ce07f9",
+      "seatPosition": "A09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "8098d189-028e-434c-813c-a218665d118b",
+      "seatPosition": "A10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "ea6bb358-6607-489c-adf6-79dc5931ec6a",
+      "seatPosition": "B01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "1df756b8-655d-4613-9182-dcee29ad277c",
+      "seatPosition": "B02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "1fcefe1d-1d72-4d3d-98f7-c0b6d0f3b3a7",
+      "seatPosition": "B03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2a5394e4-6d68-4d3f-b537-1a8d0fbbabe5",
+      "seatPosition": "B04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "03f035de-c4a1-457f-8e33-2d58b905497b",
+      "seatPosition": "B05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "7244979c-7242-45f7-b54d-cd478e6f5a31",
+      "seatPosition": "B06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d8b39488-e5ac-47b7-a17b-531eb0e9e6a4",
+      "seatPosition": "B07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b8dbf2d2-43ab-46de-b2f5-8c7b5e83243c",
+      "seatPosition": "B08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "0c35b344-2c62-4043-b960-49a876de2f92",
+      "seatPosition": "B09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2d72607e-1f80-466d-b53a-cb9b6d71e0d8",
+      "seatPosition": "B10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "20fdf39b-6285-404d-8a40-27d05dbb1e17",
+      "seatPosition": "C01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "90fcc64b-f777-46a3-9f5e-d449d8f25c1e",
+      "seatPosition": "C02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "4b2d2e1c-d624-4297-9c61-389d69b7d1c2",
+      "seatPosition": "C03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "ebeea9a3-9b8c-4209-8c9e-3f6b84d2d7f4",
+      "seatPosition": "C04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f09a60a7-cf8b-475d-94f4-6ecf55d04cd0",
+      "seatPosition": "C05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "39d9de69-8362-4731-a442-f97f10c75e87",
+      "seatPosition": "C06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "beedb45a-fb23-40e5-b6b3-0d4b2be5e2f4",
+      "seatPosition": "C07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b4da89b2-b6f3-4b94-94e6-94c19f0b3d67",
+      "seatPosition": "C08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "8ad45f79-21da-4265-95fb-33fdad2990c6",
+      "seatPosition": "C09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "12bcde96-35ca-45da-bb7c-f081f426a56a",
+      "seatPosition": "C10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "ddbc7c83-64ab-4311-b8d0-99b45db040b2",
+      "seatPosition": "D01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d7b40d0f-167a-47db-a684-15f560c5979f",
+      "seatPosition": "D02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2d9b3922-72c3-40d6-bd2d-d4a6f1e61c78",
+      "seatPosition": "D03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "63c698b9-eaa7-4b3b-a193-f7d0c8106022",
+      "seatPosition": "D04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b9d9ff3e-b0b8-48f7-b2b2-88fc0b1b1a74",
+      "seatPosition": "D05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "8cc4a89d-4b12-4a13-8a78-788320af5c0a",
+      "seatPosition": "D06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "0281d8b0-1e6f-4fbc-b56f-34c9c399f433",
+      "seatPosition": "D07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2ad89d51-7edb-40fc-9a7d-e4437a8fe45a",
+      "seatPosition": "D08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "3f45a12a-d967-47e7-bfc9-e82d73eb5929",
+      "seatPosition": "D09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2fdb4286-bd59-4758-b2f4-24508d2ea93c",
+      "seatPosition": "D10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "9e3e7f77-ff2e-44e9-bcfc-d506f6933038",
+      "seatPosition": "E01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "8720b818-7381-432b-bada-48898b69f763",
+      "seatPosition": "E02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "3b5b26b1-2446-4de1-8f0b-d72b1a77a92e",
+      "seatPosition": "E03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "5970cf4b-26e4-470d-8b18-3e1999f4fa61",
+      "seatPosition": "E04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "aa87910b-e7c4-442a-b1be-02a1d3ef8c9b",
+      "seatPosition": "E05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "41e574d9-8dbb-4426-83f4-85b5ec831d80",
+      "seatPosition": "E06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "63266dff-3fe9-4135-9a63-1bcb6a98cfe3",
+      "seatPosition": "E07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "658178ab-7678-47c6-b32c-9a138dd3b6e2",
+      "seatPosition": "E08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "2b501748-0fe7-4eae-b8cc-e1fe04ff6fba",
+      "seatPosition": "E09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "c1b4bff9-97ed-4765-9375-1c04c8d62271",
+      "seatPosition": "E10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f9476d85-24b6-4df3-9a75-35a441b3e093",
+      "seatPosition": "F01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "c4d080c1-87c7-44d0-9f47-d84b2b1b7c60",
+      "seatPosition": "F02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "cf18c96e-2ebf-4c68-88de-2a44186da0a7",
+      "seatPosition": "F03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "7a977d4f-b39e-4fd6-bf55-0a0b0e1b1f1e",
+      "seatPosition": "F04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b92708d0-87de-4c66-bb5d-b9278c5ca132",
+      "seatPosition": "F05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "bb23bc5f-16be-40a0-8e13-38ebf17a0b69",
+      "seatPosition": "F06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "5fc370b8-9f1e-4939-b4c3-f98e23c2d362",
+      "seatPosition": "F07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f39d4509-3601-4fd1-bdc6-358efb1b81b5",
+      "seatPosition": "F08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "3c2210f6-6a76-4203-b883-4b22052fc245",
+      "seatPosition": "F09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "742b7a16-8a70-4091-8124-59b0a4725208",
+      "seatPosition": "F10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "1f8a59a7-825d-4e0c-9e8b-0d2b0e3be3b2",
+      "seatPosition": "G01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b7bff4a6-d72e-4636-8d9f-21190757e4d9",
+      "seatPosition": "G02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d85cdaed-7754-4f9a-8e76-d5b9bfa470e2",
+      "seatPosition": "G03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "4b05ed7f-dfa7-401a-9933-09c2f5010503",
+      "seatPosition": "G04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "11e0c377-d197-42f0-88f7-000d9e2095d1",
+      "seatPosition": "G05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "0ac2c75d-fb7b-4009-b16e-14f44b09064f",
+      "seatPosition": "G06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "5f1ac2bc-06c6-4e80-a55d-55b063f340fe",
+      "seatPosition": "G07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "ec16b218-2b68-4fe2-88cf-231b8db49077",
+      "seatPosition": "G08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "77e5618c-d717-4239-89ba-5f94ca14c9cd",
+      "seatPosition": "G09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "86b30c1c-1d02-4a8c-9b74-c17893f9e12b",
+      "seatPosition": "G10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "7c3b3c13-85fe-4cf4-8ff1-9d5c96f92a6e",
+      "seatPosition": "H01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "1e9a19db-d6b2-49cc-b2fe-d3d1846f25d9",
+      "seatPosition": "H02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "39bb3f7a-3b3d-44b1-8b53-9fe171100800",
+      "seatPosition": "H03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "a2571acb-41c6-4175-a49d-e058ff9e0f71",
+      "seatPosition": "H04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "cb46d627-c547-43f7-9c3f-08c3d7c574eb",
+      "seatPosition": "H05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "be4478e1-8138-4267-bac4-c3a019e84cc7",
+      "seatPosition": "H06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "0c7fe41d-bbb7-4ca2-9d0c-d5a0f8fc3e18",
+      "seatPosition": "H07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "b46d7dbf-6239-4b2d-98bc-f59222761f17",
+      "seatPosition": "H08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f8f7027d-2e6b-4579-85ca-73b3941a6d56",
+      "seatPosition": "H09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "f9cd4f4a-1da9-43fe-bc57-ec1a72ef9e6f",
+      "seatPosition": "H10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "fa96f115-5591-4cc4-a2c1-16134f3f53d9",
+      "seatPosition": "I01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d6e8bc59-06b9-47be-b62f-53062e3253f1",
+      "seatPosition": "I02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "dfe5e2d8-d0bc-4018-83c2-8d4c7b6cf3f9",
+      "seatPosition": "I03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "de362a25-1589-4707-a5c9-7a558b3cd9c3",
+      "seatPosition": "I04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d077a986-b6a5-48e5-a116-e4a69cbe6cfc",
+      "seatPosition": "I05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "8b5f13f2-24b9-4a9c-b1bc-4b40e2c0e0c1",
+      "seatPosition": "I06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "91a53176-e1a9-4b76-8003-7c3c0de3a7b1",
+      "seatPosition": "I07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "fbd53675-b450-44db-a750-3a9d9bce22f6",
+      "seatPosition": "I08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "d57e98ae-9b6a-48c1-b051-6316b3a1f235",
+      "seatPosition": "I09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "5337c9b6-e96e-416b-b3a7-5a06bce92729",
+      "seatPosition": "I10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000a",
+      "seatTypeName": "Ghế thường",
+      "seatTypePrice": 55000
+    },
+    {
+      "id": "1e447973-24e2-42fc-9b45-9a3c4eb13e6f",
+      "seatPosition": "J01",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "8b5f10e5-6e1a-4b5f-9c70-f3392a3f8ff5",
+      "seatPosition": "J02",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "8c43fa9e-457b-4cd2-8fa4-12e9a635f91e",
+      "seatPosition": "J03",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "0dca20b9-0fbb-4089-82ab-826f4173d92f",
+      "seatPosition": "J04",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "d10ff9f1-68cf-49ab-bb63-dae4fa6e4395",
+      "seatPosition": "J05",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "8d39b9e1-27fd-463a-b006-ff12e6b2722c",
+      "seatPosition": "J06",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "1e898b0b-0333-45d4-b15f-bc3ffbda7364",
+      "seatPosition": "J07",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "8a558d9c-e489-4099-8f9c-dc01d0320b7f",
+      "seatPosition": "J08",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "f9c97c31-7029-46fc-9025-b7e5cbfd0525",
+      "seatPosition": "J09",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    },
+    {
+      "id": "3e55fa5c-0db7-4c7b-b289-9dff17362394",
+      "seatPosition": "J10",
+      "seatTypeId": "aaa00a00-00a0-0a00-0000-0a00ccdc000c",
+      "seatTypeName": "Ghế Đôi",
+      "seatTypePrice": 130000
+    }
+  ]
+}
