@@ -44,7 +44,7 @@ namespace WebAPIServer.Modules.MovieManagement.Businesses.HandleHall.Commands
                 }
                 Hall hall = _mapper.Map<Hall>(request.model);
                 var seatType = await _seatTypeRepository.FindByIdAsync(SeatTypeConstants.Regular);
-                hall.InitializeSeats(request.model.SeatColumn, request.model.SeatRow, seatType.Name, seatType.Price);
+                
                 await _hallRepository.CreateAsync(hall);
                 await _unitOfWork.SaveChangesAsync();
                 return hall.Id;

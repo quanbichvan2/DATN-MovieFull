@@ -12,8 +12,8 @@ using WebAPIServer.Modules.MovieManagement.DataAccesses.Data;
 namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 {
     [DbContext(typeof(MovieManagementDbContext))]
-    [Migration("20241107104921_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241207110937_Add_Seat_Diagram")]
+    partial class Add_Seat_Diagram
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -335,6 +335,9 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<string>("Diagram")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("HallId")
                         .HasColumnType("uuid");
 
@@ -349,26 +352,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
-
-                    b.Property<byte>("SeatColumn")
-                        .HasColumnType("smallint");
-
-                    b.Property<string>("SeatPosition")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<byte>("SeatRow")
-                        .HasColumnType("smallint");
-
-                    b.Property<Guid>("SeatTypeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("SeatTypeName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<double>("SeatTypePrice")
-                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -428,7 +411,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-
                     b.Property<bool>("IsActived")
                         .HasColumnType("boolean");
 
@@ -443,10 +425,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 
                     b.Property<Guid>("MovieId")
                         .HasColumnType("uuid");
-
-                    //b.Property<byte>("MovieRuntimeMinutes")
-                    //    .HasColumnType("smallint");
-
 
                     b.Property<DateTimeOffset>("StartTime")
                         .HasColumnType("timestamp with time zone");

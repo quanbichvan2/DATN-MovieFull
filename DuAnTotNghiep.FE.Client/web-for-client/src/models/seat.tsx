@@ -1,18 +1,17 @@
 export interface SeatType {
-    id:    string;
-    name:  string;
+    id:  string;
+    name: string;
     price: number;
 }
 
-export class SeatTypeDTO {
+export interface SeatTypeDTO {
     id: string;
     name: string;
     price: number;
     type: string;
+}
 
-    constructor({ id, name, price }: any) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-    }
+export interface SeatDTO {
+    id: string;
+    diagram: string;
 }
