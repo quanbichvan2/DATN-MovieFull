@@ -5,22 +5,16 @@ namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
 {
     public class Seat : BaseAuditableEntity
     {
-        public string? Diagram { get; set; }
+        public string SeatNumber { get; set; } = default!;
+        public string Row { get; set; } = default!;
+        public bool IsPurchased { get; set; }
 
-        [ForeignKey("Hall")]
+        [ForeignKey(nameof(Hall))]
         public Guid HallId { get; set; }
-        public Hall Hall { get; set; } = default!;
+        public virtual Hall? Hall { get; set; }
 
-        /// <summary>
-        ///   Cột sẽ bắt đầu với 1, nên cần chuyển đổi nó sang bảng chữ cái
-        /// </summary>
-        /// <param name="row"></param>
-        /// <param name="col"></param>
-        /// <returns>GetSeatName(1, 3) sẽ trả về "A03"</returns>
-        public static string GetSeatPosition(byte row, byte col)
-        {
-            char rowLetter = (char)('A' + row - 1);
-            return $"{rowLetter}{col:D2}";
-        }
+        [ForeignKey(nameof(Type))]
+        public Guid TypeId { get; set; }
+        public virtual SeatType? Type { get; set; }
     }
 }

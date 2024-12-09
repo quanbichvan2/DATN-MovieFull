@@ -14,7 +14,8 @@ namespace WebAPIServer.Modules.Catalog.DataAccesses.Repositories
 			return await _context.Combos
 				.Include(x => x.Products)
 				.AsNoTracking()
-				.FirstOrDefaultAsync(x => x.Id == id);
+				.FirstOrDefaultAsync(x => x.Id == id)
+				;
 		}
 		public async Task<bool> IsProductComboExist(Guid comboId, Guid? productId)
 		{

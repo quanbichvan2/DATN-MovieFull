@@ -2,9 +2,10 @@
 
 namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
 {
-    public class SeatType: BaseAuditableEntity
+    public class SeatType : BaseAuditableEntity
     {
         public string Name { get; set; } = default!;
+        public string Code { get; set; } = default!;
         public double Price { get; set; }
     }
     public static class SeatTypeConstants

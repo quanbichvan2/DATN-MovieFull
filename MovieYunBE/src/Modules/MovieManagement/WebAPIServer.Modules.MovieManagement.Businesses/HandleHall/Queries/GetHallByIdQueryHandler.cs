@@ -34,6 +34,7 @@ namespace WebAPIServer.Modules.MovieManagement.Businesses.HandleHall.Queries
                 {
                     return ResponseExceptionHelper.ErrorResponse<Genre>(ErrorCode.NotFound);
                 }
+
                 var hallForView = _mapper.Map<HallForViewDetailsDto>(hall);
                 return hallForView;
             }

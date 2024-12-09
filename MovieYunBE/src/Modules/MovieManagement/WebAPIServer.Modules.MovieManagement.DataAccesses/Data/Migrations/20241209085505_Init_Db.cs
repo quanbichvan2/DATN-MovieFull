@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Seat_Diagram : Migration
+    public partial class Init_Db : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,9 +78,9 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CinemaName = table.Column<string>(type: "text", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    TotalSeat = table.Column<byte>(type: "smallint", nullable: false),
+                    TotalSeat = table.Column<int>(type: "integer", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -155,8 +155,11 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Diagram = table.Column<string>(type: "text", nullable: true),
+                    SeatName = table.Column<string>(type: "text", nullable: false),
+                    Row = table.Column<string>(type: "text", nullable: false),
+                    IsPurchased = table.Column<bool>(type: "boolean", nullable: false),
                     HallId = table.Column<Guid>(type: "uuid", nullable: false),
+                    TypeId = table.Column<Guid>(type: "uuid", nullable: false),
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     ModifiedBy = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -172,6 +175,13 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                         column: x => x.HallId,
                         principalSchema: "movie_management",
                         principalTable: "Halls",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Seats_SeatTypes_TypeId",
+                        column: x => x.TypeId,
+                        principalSchema: "movie_management",
+                        principalTable: "SeatTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -318,6 +328,12 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                 column: "HallId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Seats_TypeId",
+                schema: "movie_management",
+                table: "Seats",
+                column: "TypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shows_CinemaHallId",
                 schema: "movie_management",
                 table: "Shows",
@@ -346,10 +362,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                 schema: "movie_management");
 
             migrationBuilder.DropTable(
-                name: "SeatTypes",
-                schema: "movie_management");
-
-            migrationBuilder.DropTable(
                 name: "Shows",
                 schema: "movie_management");
 
@@ -359,6 +371,10 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Genres",
+                schema: "movie_management");
+
+            migrationBuilder.DropTable(
+                name: "SeatTypes",
                 schema: "movie_management");
 
             migrationBuilder.DropTable(

@@ -12,8 +12,8 @@ using WebAPIServer.Modules.MovieManagement.DataAccesses.Data;
 namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 {
     [DbContext(typeof(MovieManagementDbContext))]
-    [Migration("20241207110937_Add_Seat_Diagram")]
-    partial class Add_Seat_Diagram
+    [Migration("20241209092148_Alter_Seat_SeatNumber")]
+    partial class Alter_Seat_SeatNumber
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,7 +134,7 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("CinemaName")
+                    b.Property<string>("Address")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -160,8 +160,8 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<byte>("TotalSeat")
-                        .HasColumnType("smallint");
+                    b.Property<int>("TotalSeat")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -335,9 +335,6 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("Diagram")
-                        .HasColumnType("text");
-
                     b.Property<Guid>("HallId")
                         .HasColumnType("uuid");
 
@@ -347,15 +344,31 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<bool>("IsPublised")
                         .HasColumnType("boolean");
 
+                    b.Property<bool>("IsPurchased")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
+                    b.Property<string>("Row")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("SeatNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TypeId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HallId");
+
+                    b.HasIndex("TypeId");
 
                     b.ToTable("Seats", "movie_management");
                 });
@@ -365,6 +378,10 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -495,7 +512,15 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WebAPIServer.Modules.MovieManagement.Domain.Entities.SeatType", "Type")
+                        .WithMany()
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Hall");
+
+                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("WebAPIServer.Modules.MovieManagement.Domain.Entities.Show", b =>

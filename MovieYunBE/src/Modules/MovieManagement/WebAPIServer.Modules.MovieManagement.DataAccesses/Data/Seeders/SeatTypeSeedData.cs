@@ -17,18 +17,21 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Seeders
                         {
                             Id = SeatTypeConstants.Regular,
                             Name = "Ghế thường",
+                            Code = "regular",
                             Price = 55000
                         },
                         new SeatType
                         {
                             Id = SeatTypeConstants.Vip,
                             Name = "Ghế VIP",
+                            Code = "vip",
                             Price = 75000
                         },
                         new SeatType
                         {
                             Id = SeatTypeConstants.Couple,
                             Name = "Ghế đôi",
+                            Code = "couple",
                             Price = 130000
                         }
                     );

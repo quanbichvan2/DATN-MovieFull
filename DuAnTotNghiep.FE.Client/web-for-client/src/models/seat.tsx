@@ -8,7 +8,7 @@ export interface SeatTypeDTO {
     id: string;
     name: string;
     price: number;
-    type: string;
+    type: "regular" | "vip" | "couple";
 }
 
 export interface SeatDTO {

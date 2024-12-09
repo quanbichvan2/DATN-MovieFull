@@ -13,8 +13,11 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Repositories
         public override async Task<Hall?> FindByIdAsync(Guid? id)
         {
             var hall =  await _context.Halls
-                .Include(x => x.Seats)
+                .Include(x => x.Seats.OrderBy(x => x.Row))
+                .ThenInclude(x => x.Type)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+
             return hall;
         }
     }

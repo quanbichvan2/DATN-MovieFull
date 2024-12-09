@@ -15,6 +15,9 @@ namespace WebAPIServer.Modules.MovieManagement.Businesses.HandleHall.Models
     public class SeatForViewDto
     {
         public Guid Id { get; set; }
-        public string? Diagram { get; set; }
-	}
+        public string? Row { get; set; }
+        public bool IsPurchased { get; set; }
+        public string? Type { get; set; }
+        public string? SeatNumber { get; set; }
+    }
 }

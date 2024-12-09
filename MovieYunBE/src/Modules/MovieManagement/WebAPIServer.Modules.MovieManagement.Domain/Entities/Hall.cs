@@ -4,10 +4,9 @@ namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
 {
     public class Hall : BaseAuditableEntity
     {
-        public string CinemaName { get; private set; } = "7 Anh Em Cinema";
+        public string Address { get; set; } = default!;
         public string Name { get; set; } = default!;
-        public byte TotalSeat { get; private set; }
-
+        public int TotalSeat { get; set; }
         public virtual ICollection<Seat> Seats { get; set; } = new List<Seat>();
     }
 }

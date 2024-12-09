@@ -10,6 +10,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{81C07090-FBD1-4118-B616-C31B25BBEA07}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{B2E0993F-223E-4926-A3BA-AA7D6D2C34F3}"
+	ProjectSection(SolutionItems) = preProject
+		src\Bootstrapper\WebAPIServer.Bootstrapper\Program.cs = src\Bootstrapper\WebAPIServer.Bootstrapper\Program.cs
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPIServer.Bootstrapper", "src\Bootstrapper\WebAPIServer.Bootstrapper\WebAPIServer.Bootstrapper.csproj", "{AC344800-1680-4381-BDD9-522F6045A9E4}"
 EndProject
