@@ -18,6 +18,7 @@ namespace WebAPIServer.Modules.MovieManagement.Businesses.HandleHall.Models
         public string? Row { get; set; }
         public bool IsPurchased { get; set; }
         public string? Type { get; set; }
-        public string? SeatNumber { get; set; }
+        public string? SeatPosition { get; set; }
+        public decimal Price { get; set; }
     }
 }

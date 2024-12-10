@@ -184,6 +184,10 @@ const ScheduleManagement: React.FC = () => {
                               <td className="col-6">
                                 {/* Hiển thị các suất chiếu cho từng phim, sử dụng Flexbox */}
                                 <div className="showtimes-container">
+                                  { (() => {
+                                    console.log('[time]: ', movieName.listHall)
+                                    return <></>
+                                  })()}
                                   {movieName.listHall.map((s) => (
                                     <div key={s.hallId} className="showtime-item-container">
                                       {s.listTime.map(a => (

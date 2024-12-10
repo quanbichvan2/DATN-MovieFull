@@ -5,7 +5,7 @@ namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
 {
     public class Seat : BaseAuditableEntity
     {
-        public string SeatNumber { get; set; } = default!;
+        public string SeatPosition { get; set; } = default!;
         public string Row { get; set; } = default!;
         public bool IsPurchased { get; set; }
 
@@ -16,5 +16,6 @@ namespace WebAPIServer.Modules.MovieManagement.Domain.Entities
         [ForeignKey(nameof(Type))]
         public Guid TypeId { get; set; }
         public virtual SeatType? Type { get; set; }
+        
     }
 }

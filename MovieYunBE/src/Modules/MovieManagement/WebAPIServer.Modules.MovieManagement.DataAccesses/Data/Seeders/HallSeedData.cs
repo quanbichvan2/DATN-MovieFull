@@ -57,7 +57,7 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Seeders
 						HallId = hallId,
 						Id = Guid.NewGuid(),
 						Row = row,
-						SeatNumber = row + (i + 1).ToString("D2"),
+						SeatPosition = row + (i + 1).ToString("D2"),
 						TypeId = typeId,
 					};
 

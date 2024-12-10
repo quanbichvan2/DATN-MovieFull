@@ -16,8 +16,8 @@ namespace WebAPIServer.Modules.MovieManagement.Businesses.HandleHall
             CreateMap<Hall, HallForViewDto>();
             CreateMap<Hall, HallForViewDetailsDto>();
             CreateMap<Seat, SeatForViewDto>()
-                .ForMember(x => x.Type, origin => origin.MapFrom(y => y.Type.Code));
-                
+                .ForMember(x => x.Type, origin => origin.MapFrom(y => y.Type.Code))
+                .ForMember(x => x.Price, origin => origin.MapFrom(y => y.Type.Price));
             CreateMap<HallForCreateDto, Hall>();
             //NOTE: Trong ánh xạ này chỉ định rằng Seats sẽ bị bỏ qua khi ánh xạ từ HallForUpdateDto sang Hall nhờ vào dòng lệnh:
             CreateMap<HallForUpdateDto, Hall>()

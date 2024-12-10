@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WebAPIServer.Modules.MovieManagement.DataAccesses.Data;
@@ -11,9 +12,11 @@ using WebAPIServer.Modules.MovieManagement.DataAccesses.Data;
 namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Migrations
 {
     [DbContext(typeof(MovieManagementDbContext))]
-    partial class MovieManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241210071752_update_SeatPosition")]
+    partial class update_SeatPosition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

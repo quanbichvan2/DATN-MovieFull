@@ -12,6 +12,10 @@ export interface SeatTypeDTO {
 }
 
 export interface SeatDTO {
+    seatPosition: any;
+    seatNumber: any;
     id: string;
     diagram: string;
+    row: string;
+    // seatNumber : string;
 }

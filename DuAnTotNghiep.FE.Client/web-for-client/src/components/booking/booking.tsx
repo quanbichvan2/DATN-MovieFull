@@ -13,9 +13,10 @@ import { SnackComponent } from "./snack";
 import { Link } from "react-router-dom";
 import { SeatTypeDTO } from "../../models/seat";
 import hallService from "../../services/hallService";
+import orderService from "../../services/orderService";
 // import { useSeatsTypeQuerry } from "../../hooks/useSeatType";
 interface Seat {
-    seatNumber: string;
+    seatPosition: string;
     type: "regular" | "vip" | "couple";
     isSelected?: boolean;
     isFirstCouple?: boolean;
@@ -43,6 +44,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const totalPrice = 675000; // Giá trị tạm tính
 
     const [products, setProducts] = useState<Product[]>([]);
+
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
@@ -54,22 +56,26 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [maxSeats, setMaxSeats] = useState<{ regular: number; vip: number; couple: number }>({ regular: 0, vip: 0, couple: 0 });
 
     const [hallId, setHallId] = useState<string>("");
+    const [selectedProducts, setSelectedProducts] = useState<{ [key: string]: { name: string, quantity: number } }>({});
 
     const loadSeatDiagam = async () => {
         if (hallId == "") return;
         const hallData = await hallService.getHallById(hallId);
-        
+
         updateMaxSeatByDiagramSeat(hallData.seats);
 
-        const rowMapping = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J' ];
-        let diagram : any[] = [];
+        const rowMapping = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+        let diagram: any[] = [];
         rowMapping.forEach(x => {
             const rowSeats = hallData.seats.filter(y => y.row === x);
-            const orderedSeat : any[] = [];
+            const orderedSeat: any[] = [];
 
-            for(let i = 1; i < 11; i++) {
-                const seat = rowSeats.find(x => x.seatNumber.includes(i));
-                orderedSeat.push(seat);
+            for (let i = 1; i < 11; i++) {
+                const seat = rowSeats.find(y => {
+                    const seatNumber = parseInt(y.seatPosition.replace(/\D/g, ''));
+                    return seatNumber === i;
+                });
+                if (seat) orderedSeat.push(seat);
             }
 
             diagram.push({
@@ -78,13 +84,13 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             })
         });
 
-        console.log('#9', diagram);
+        console.log('list row seat', diagram);
         setSeatDiagram(diagram);
     }
 
     const updateMaxSeatByDiagramSeat = (seats: any) => {
         const total = seats.length;
-        console.log('#6', seats);
+        console.log('list Seat', seats);
         const regularTotal = seats.filter((x: any) => x.type === "regular").length;
         const coupleTotal = seats.filter((x: any) => x.type === "couple").length;
         const vipTotal = total - regularTotal - coupleTotal;
@@ -104,7 +110,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 const productsData = await productService.getProducts();
                 const categoriesData = await categoryService.getCategories();
                 const seatTypeData = await seatService.getAllSeatsType();
-                
+                // const orderData = await orderService.createOrder();
                 setProducts(productsData);
                 setCategories(categoriesData); // Chuyển đổi thành instance của Category
                 setSeatTypes(seatTypeData);
@@ -152,7 +158,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const handleSelectTime = (time: string) => {
         setSelectedTime(time);
     };
-
     const handleSelectSeat = (seat: Seat, rowIndex: number, seatIndex: number) => {
         const seatType = seat.type;
         const isSeatSelected = seat.isSelected;
@@ -169,7 +174,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 // Nếu ghế đã được chọn, giảm số ghế đã chọn
                 updatedSeats[seatType] -= (seatType === "couple" ? 2 : 1);
             }
-
             return updatedSeats;
         });
 
@@ -185,7 +189,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             } else {
                 selectedSeat.isSelected = !isSeatSelected;
             }
-
             return updatedDiagram;
         });
     };
@@ -202,19 +205,84 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                 updatedSeats[type] += increment;
             }
         }
-
         setSelectedSeats(updatedSeats);
     };
-
-    const handleSubmit = () => {
-        const totalSeats = selectedSeats.regular + selectedSeats.vip + selectedSeats.couple * 2;
-        const totalMaxSeats = maxSeats.regular + maxSeats.vip + maxSeats.couple * 2;
-
-        if (totalSeats === totalMaxSeats) {
-            alert("Đặt vé thành công!");
-        } else {
-            alert("Bạn chưa mua đủ loại ghế.");
+    const handleCreateOrder = async () => {
+        if (!setSelectedDay && !setSelectedTime && !setHallId && selectedSeats.regular + selectedSeats.vip + selectedSeats.couple === 0) {
+            alert("Vui lòng chọn đầy đủ ngày, giờ và ghế trong rạp");
+            return;
         }
+        // Lấy danh sách seatId từ các ghế đã chọn
+        const selectedSeatIds = seatDiagram
+            .flatMap(row => row.seats) // Gộp tất cả các hàng ghế thành một danh sách
+            .filter(seat => seat.isSelected) // Chỉ giữ lại các ghế được chọn
+            .map(seat => seat.id); // Lấy ID của ghế
+
+        if (selectedSeatIds.length === 0) {
+            alert("Bạn chưa chọn ghế.");
+            return;
+        }
+
+        const orderData = {
+            showId: shows.shows?.id,
+            seatId: selectedSeatIds,
+            comboId: formatProductList()
+        }
+        console.log(orderData);
+        try {
+            // Gọi service để tạo đơn hàng
+            await orderService.createOrder(orderData);
+            alert("Đặt vé thành công!");
+        } catch (error) {
+            alert("Đặt vé thất bại!");
+        }
+    }
+
+    // const handleSubmit = () => {
+    //     const totalSeats = selectedSeats.regular + selectedSeats.vip + selectedSeats.couple * 2;
+    //     const totalMaxSeats = maxSeats.regular + maxSeats.vip + maxSeats.couple * 2;
+
+    //     if (totalSeats === totalMaxSeats) {
+    //         alert("Đặt vé thành công!");
+    //     } else {
+    //         alert("Bạn chưa mua đủ loại ghế.");
+    //     }
+    // };
+    const calculateTotalPrice = () => {
+        let total = 0;
+        const regularSeatType = seatTypes.find(seat => seat.type === "regular");
+        const vipSeatType = seatTypes.find(seat => seat.type === "vip");
+        const coupleSeatType = seatTypes.find(seat => seat.type === "couple");
+
+        total += selectedSeats.regular * (regularSeatType?.price ?? 0); // Dùng giá trị mặc định là 0 nếu không tìm thấy loại ghế
+        total += selectedSeats.vip * (vipSeatType?.price ?? 0);
+        total += (selectedSeats.couple / 2) * (coupleSeatType?.price ?? 0);
+
+        // Cộng giá sản phẩm (bắp, nước)
+        Object.values(selectedProducts).forEach(product => {
+            const productPrice = products.find(p => p.name === product.name)?.price || 0;
+            total += product.quantity * productPrice;
+        });
+
+        return total;
+    }
+
+
+    const handleProductChange = (product: Product, quantity: number) => {
+        setSelectedProducts(prev => {
+            const updatedProducts = { ...prev };
+            if (quantity > 0) {
+                updatedProducts[product.name] = { name: product.name, quantity };
+            } else {
+                delete updatedProducts[product.name];  // Nếu số lượng = 0, xóa sản phẩm khỏi danh sách
+            }
+            return updatedProducts;
+        });
+    };
+    const formatProductList = () => {
+        return Object.values(selectedProducts)
+            .map(product => `${product.quantity} ${product.name}`)
+            .join(", ");
     };
 
     return (
@@ -267,38 +335,38 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                     <h2>Chọn Loại Vé</h2>
                     <div className="d-flex justify-content-around mb-4">
                         {seatTypes.map((seatType) =>
-                            (
-                                <div key={seatType.id} className="ticket-box text-light p-3" style={{ minWidth: "400px" }}>
-                                    <h4>{seatType.name}</h4> {/* Tên loại ghế */}
-                                    <p style={{ color: "yellow", textTransform: "uppercase", fontWeight: "bold" }}>
-                                        {seatType.type === "regular" ? "Đơn" : seatType.type === "vip" ? "Đơn" : "Đôi"}
-                                    </p>
+                        (
+                            <div key={seatType.id} className="ticket-box text-light p-3" style={{ minWidth: "400px" }}>
+                                <h4>{seatType.name}</h4> {/* Tên loại ghế */}
+                                <p style={{ color: "yellow", textTransform: "uppercase", fontWeight: "bold" }}>
+                                    {seatType.type === "regular" ? "Đơn" : seatType.type === "vip" ? "Đơn" : "Đôi"}
+                                </p>
 
-                                    <p>{seatType.price.toLocaleString()} VND</p> {/* Giá loại ghế */}
+                                <p>{seatType.price.toLocaleString()} VND</p> {/* Giá loại ghế */}
 
-                                    {/* Điều chỉnh số lượng ghế */}
-                                    <div className="d-flex align-items-center">
-                                        <button
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => handleTicketSelection(seatType.type, -1)} // Giảm số lượng ghế
-                                        >
-                                            -
-                                        </button>
-                                        <span style={{ margin: "0 10px" }}>
+                                {/* Điều chỉnh số lượng ghế */}
+                                <div className="d-flex align-items-center">
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        onClick={() => handleTicketSelection(seatType.type, -1)} // Giảm số lượng ghế
+                                    >
+                                        -
+                                    </button>
+                                    <span style={{ margin: "0 10px" }}>
 
-                                            {seatType.name === "Ghế đôi"
-                                                ? selectedSeats[seatType.type] / 2 // Hiển thị số lượng ghế đôi đã chọn
-                                                : selectedSeats[seatType.type]}  {/* Hiển thị số ghế đã chọn */}
-                                        </span>
-                                        <button
-                                            className="btn btn-outline-secondary"
-                                            onClick={() => handleTicketSelection(seatType.type, 1)} // Tăng số lượng ghế
-                                        >
-                                            +
-                                        </button>
-                                    </div>
+                                        {seatType.name === "Ghế đôi"
+                                            ? selectedSeats[seatType.type] / 2 // Hiển thị số lượng ghế đôi đã chọn
+                                            : selectedSeats[seatType.type]}  {/* Hiển thị số ghế đã chọn */}
+                                    </span>
+                                    <button
+                                        className="btn btn-outline-secondary"
+                                        onClick={() => handleTicketSelection(seatType.type, 1)} // Tăng số lượng ghế
+                                    >
+                                        +
+                                    </button>
                                 </div>
-                            )
+                            </div>
+                        )
                         )}
                     </div>
 
@@ -314,7 +382,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                     // Xác định className cho ghế
                                     let seatClass = `seat ${seat.type} ${seat.isSelected ? "selected" : ""}`;
                                     seat.className = seatClass;
-                                    let seatContent = seat.seatNumber; // Nội dung mặc định là số ghế hiện tại
+                                    let seatContent = seat.seatPosition; // Nội dung mặc định là số ghế hiện tại
 
                                     // Thêm class "coupled" cho ghế đầu tiên trong cặp
                                     if (seat.type === "couple") {
@@ -322,19 +390,19 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                             seatClass += " coupled";
                                             seat.className += " coupled";
                                             if (seatIndex + 1 < row.seats.length && row.seats[seatIndex + 1].type === "couple") {
-                                                seatContent += `, ${row.seats[seatIndex + 1].seatNumber}`; // Hiển thị cả 2 ghế
+                                                seatContent += `, ${row.seats[seatIndex + 1].seatPosition}`; // Hiển thị cả 2 ghế
                                             }
                                         } else if (seatIndex !== 0 && row.seats[seatIndex - 1].type === "couple" && row.seats[seatIndex - 1].className.includes("coupled")) {
                                             seatClass += " couples";
                                             seat.className += " couples";
                                             if (seatIndex + 1 < row.seats.length && row.seats[seatIndex + 1].type === "couple") {
-                                                seatContent += `, ${row.seats[seatIndex + 1].seatNumber}`; // Hiển thị cả 2 ghế
+                                                seatContent += `, ${row.seats[seatIndex + 1].seatPosition}`; // Hiển thị cả 2 ghế
                                             }
                                         } else if (seatIndex !== 0 && row.seats[seatIndex - 1].type === "couple" && row.seats[seatIndex - 1].className.includes("couples")) {
                                             seatClass += " coupled";
                                             seat.className += " coupled";
                                             if (seatIndex + 1 < row.seats.length && row.seats[seatIndex + 1].type === "couple") {
-                                                seatContent += `, ${row.seats[seatIndex + 1].seatNumber}`; // Hiển thị cả 2 ghế
+                                                seatContent += `, ${row.seats[seatIndex + 1].seatPosition}`; // Hiển thị cả 2 ghế
                                             }
                                         }
                                     }
@@ -342,10 +410,10 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                         <span
                                             key={seatIndex}
                                             className={seatClass}
-                                            title={seatClass.includes("coupled") ? seatContent : seat.seatNumber} // Thêm tiêu đề
+                                            title={seatClass.includes("coupled") ? seatContent : seat.seatPosition} // Thêm tiêu đề
                                             onClick={() => handleSelectSeat(seat, rowIndex, seatIndex)}
                                         >
-                                            {seatClass.includes("coupled") ? seatContent : seat.seatNumber} {/* Hiển thị nội dung */}
+                                            {seatClass.includes("coupled") ? seatContent : seat.seatPosition} {/* Hiển thị nội dung */}
                                         </span>
                                     );
                                 })}
@@ -362,7 +430,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                         <div className="row d-flex justify-content-center">
                             {filterProductsByCategory('Bắp').map((product, index) => (
                                 <div className="col-md-4" key={index}>
-                                    <SnackComponent product={product} />
+                                    <SnackComponent product={product} onChange={handleProductChange} />
                                 </div>
                             ))}
                         </div>
@@ -371,7 +439,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                         <div className="row d-flex justify-content-center">
                             {filterProductsByCategory('Nước').map((product, index) => (
                                 <div className="col-md-4" key={index}>
-                                    <SnackComponent product={product} />
+                                    <SnackComponent product={product} onChange={handleProductChange} />
                                 </div>
                             ))}
                         </div>
@@ -382,21 +450,36 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                             <h5 style={{ fontWeight: 900 }}>
                                 {shows.shows?.movieTitle}
                             </h5>
-
-                            <h6>Rạp 7Cinema - P01 | 3 HSSV-Người Cao Tuổi, 1 Người Lớn</h6>
-                            <p>2 Fanta 32oz, 1 Poca Wavy 54gr, 1 Combo Solo, 1 Combo Couple</p>
+                            <div>
+                                {shows.shows?.listHall.map((hall, index) => (
+                                    <div
+                                        key={hall.hallId}
+                                        id={`show${index + 1}`}
+                                    >
+                                        <h6>Rạp 7Cinema - {hall.hallName}
+                                            {selectedSeats.regular > 0 &&
+                                                <span style={{ marginLeft: '3px' }}> | {selectedSeats.regular}  Ghế Thường </span>}
+                                            {selectedSeats.vip > 0 &&
+                                                <span>{selectedSeats.vip} Ghế VIP </span>}
+                                            {selectedSeats.couple > 0 &&
+                                                <span> và {selectedSeats.couple / 2} Ghế Đôi </span>}
+                                        </h6>
+                                    </div>
+                                ))}
+                            </div>
+                            <p>{formatProductList()}</p>
                         </div>
                         <div className="col-md-6 text-end">
                             <h5>
                                 Thời gian giữ vé: <span>{formatTime(countdown)}</span>
                             </h5>
                             <h5>
-                                Tạm tính: <span>{totalPrice.toLocaleString()} VNĐ</span>
+                                Tạm tính: <span>{calculateTotalPrice().toLocaleString()} VNĐ</span>
                             </h5>
                             {/* <button onClick={handleSubmit} className="btn btn-warning" id="reserveBtn">
                                 Đặt Vé
                             </button> */}
-                            <Link className="btn btn-warning" to={"/payment"}>Đặt Vé</Link>
+                            <Link className="btn btn-warning" onClick={handleCreateOrder}>Đặt Vé</Link>
                         </div>
                     </div>
 

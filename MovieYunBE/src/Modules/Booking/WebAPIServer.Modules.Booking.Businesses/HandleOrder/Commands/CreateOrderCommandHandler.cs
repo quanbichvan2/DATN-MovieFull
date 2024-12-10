@@ -73,7 +73,8 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
                 order.CreatedAt = DateTime.UtcNow;
                 //public Guid? UserId { get; set; }
                 //public string? UserName { get; set; }
-                order.PaymentId = request.Model.PaymentId;
+
+                //order.PaymentId = request.Model.PaymentId;
                 order.StatusId = OrderStatusConstants.Confirmed;
 
 
@@ -110,7 +111,7 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
 					line.ShowId = show.Id;
 					
 					//line.Price = ticketType.Price + seat.SeatTypePrice;
-                    line.Price = seat.SeatTypePrice;
+                    line.Price = seat.Price;
 
                     line.SeatId = seat.Id;
 					line.SeatName = seat.SeatPosition;
@@ -118,7 +119,7 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
 					//line.TypeId = ticketType.Id;
 					
 					//line.TypeName = ticketType.Name;
-                    line.TypeName = seat.SeatTypeName;
+                    line.TypeName = seat.Type;
 
                     line.HallId = show.CinemaHallId;
 					line.HallName = show.HallName;
@@ -145,11 +146,11 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
                     var cacheKey = new { Time = show.StartTime, HallId = show.CinemaHallId, SeatName = seat.SeatPosition };
                     if (_cache.TryGetValue(cacheKey, out var currentValue))
                     {
-                        _cache.Set(cacheKey, currentValue, TimeSpan.FromMinutes(show.MovieRuntimeMinutes + 15));
+                        throw new InvalidOperationException("Có lỗi xảy ra trong qua trình giao dịch!");
 					}
 					else
 					{
-                        throw new InvalidOperationException("Co lỗi xảy ra trong qua trình giao dịch!");
+                       _cache.Set(cacheKey, currentValue, TimeSpan.FromMinutes(show.MovieRuntimeMinutes + 15));
                     }
                 }
 

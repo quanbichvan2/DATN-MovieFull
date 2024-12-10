@@ -4,17 +4,26 @@ import { formatCurrency } from "./ulti";
 
 interface SnackComponentProp {
     product: Product
+    onChange: (product: Product, quantity: number) => void;
 }
-const SnackComponent = ({ product }: SnackComponentProp) => {
+const SnackComponent = ({ product, onChange  }: SnackComponentProp) => {
     const [quantity, setQuantity] = useState(0);
 
-    const increaseQuantity = () => setQuantity((prev) => prev + 1);
-    const decreaseQuantity = () => setQuantity((prev) => {
-        if (prev == 0) {
-            return 0
-        }
-        return prev > 0 ? prev - 1 : 0
-    });
+    const increaseQuantity = () => {
+        setQuantity(prev => {
+            const newQuantity = prev + 1;
+            onChange(product, newQuantity);  // Gọi hàm callback mỗi khi thay đổi số lượng
+            return newQuantity;
+        });
+    };
+    
+    const decreaseQuantity = () => {
+        setQuantity(prev => {
+            const newQuantity = prev > 0 ? prev - 1 : 0;
+            onChange(product, newQuantity);  // Gọi hàm callback mỗi khi thay đổi số lượng
+            return newQuantity;
+        });
+    };
 
     return (
         <div className="item-box">

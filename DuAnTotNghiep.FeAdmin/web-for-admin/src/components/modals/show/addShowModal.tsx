@@ -9,6 +9,7 @@ import { toISOString } from '../../../utils/utils';
 import instance from '../../../apis/base';
 import { toast } from 'react-toastify';
 import { useAddShowMutation } from '../../../hooks/useShow';
+import { convertToTimezone7 } from '../../../utils/date-time';
 // Component AddShowModal
 const AddShowModal: React.FC<{
   onSave: (newShow: Show) => void;
@@ -219,6 +220,9 @@ const AddShowModal: React.FC<{
 
 
     const handleSubmit = async () => {
+      // const timeInUtc7  = convertToTimezone7(toISOString(dataStart, startTime));
+      // console.log("[time]:  ",timeInUtc7);
+      
       const payload = {
         "movieId": idMovie,
         "startTime": toISOString(dataStart, startTime),

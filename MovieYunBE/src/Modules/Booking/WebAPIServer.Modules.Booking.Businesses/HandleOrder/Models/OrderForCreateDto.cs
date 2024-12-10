@@ -5,7 +5,7 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Models
 {
 	public class OrderForCreateDto : OrderBaseDto
 	{
-        public Guid PaymentId { get; set; }
+        //public Guid PaymentId { get; set; }
         
         //public OrderStatus Status { get; set; }
         public Guid? VoucherId { get; set; }
