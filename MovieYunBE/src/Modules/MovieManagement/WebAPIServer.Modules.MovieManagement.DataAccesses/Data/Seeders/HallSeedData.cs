@@ -32,7 +32,7 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Seeders
                     {
                         Id = rap2Id,
                         Name = "Rạp 2",
-                        Address = "1 Nguyễn Chí Thanh",
+                        Address = "100 Trần Hưng Đạo",
                         TotalSeat = 100,
                         Seats = GenerateSeatDiagram(rap2Id)
                     };
@@ -57,7 +57,7 @@ namespace WebAPIServer.Modules.MovieManagement.DataAccesses.Data.Seeders
 						HallId = hallId,
 						Id = Guid.NewGuid(),
 						Row = row,
-						SeatNumber = row + (i + 1).ToString(),
+						SeatNumber = row + (i + 1).ToString("D2"),
 						TypeId = typeId,
 					};
 

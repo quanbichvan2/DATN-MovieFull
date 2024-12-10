@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OneOf;
 using RabbitMQ.Client;
+using System.Net.Sockets;
 using System.Text;
 using WebAPIServer.Modules.Booking.Businesses.Contracts;
 using WebAPIServer.Modules.Booking.Businesses.Contracts.Apis;
@@ -84,11 +85,12 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
 						return ResponseExceptionHelper.ErrorResponse<ShowDto>(ErrorCode.NotFound);
 					}
 
-					var ticketType = await _ticketsModuleApi.GetTicketTypeById(item.TypeId);
-					if (ticketType == null)
-					{
-						return ResponseExceptionHelper.ErrorResponse<TicketTypeDto>(ErrorCode.NotFound);
-					}
+					//tạm tắt vụ đặt theo giờ cao điểm v.v
+					//var ticketType = await _ticketsModuleApi.GetTicketTypeById(item.TypeId);
+					//if (ticketType == null)
+					//{
+					//	return ResponseExceptionHelper.ErrorResponse<TicketTypeDto>(ErrorCode.NotFound);
+					//}
 
 					var hall = await _movieManagementModuleApi.GetHallByIdAsync(show.CinemaHallId);
 					if (hall == null)
@@ -106,12 +108,19 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
 					var line = new OrderMovie();
 					line.OrderId = order.Id;
 					line.ShowId = show.Id;
-					line.Price = ticketType.Price + seat.SeatTypePrice;
-					line.SeatId = seat.Id;
+					
+					//line.Price = ticketType.Price + seat.SeatTypePrice;
+                    line.Price = seat.SeatTypePrice;
+
+                    line.SeatId = seat.Id;
 					line.SeatName = seat.SeatPosition;
-					line.TypeId = ticketType.Id;
-					line.TypeName = ticketType.Name;
-					line.HallId = show.CinemaHallId;
+
+					//line.TypeId = ticketType.Id;
+					
+					//line.TypeName = ticketType.Name;
+                    line.TypeName = seat.SeatTypeName;
+
+                    line.HallId = show.CinemaHallId;
 					line.HallName = show.HallName;
 					line.Quantity = (int)(request.Model?.Line.Count());
                     line.ShowEndAt = show.EndTime;

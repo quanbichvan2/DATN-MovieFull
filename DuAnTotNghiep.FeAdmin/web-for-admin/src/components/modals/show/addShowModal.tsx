@@ -191,6 +191,7 @@ const AddShowModal: React.FC<{
           hallId: listHall,
 
         };
+        console.log(updatedFormData);
         onSave(updatedFormData);
         setSuccessMessage('Thêm suất chiếu thành công!');
         setTimeout(() => {
