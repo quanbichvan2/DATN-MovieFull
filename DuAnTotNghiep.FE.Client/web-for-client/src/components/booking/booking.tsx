@@ -28,7 +28,12 @@ interface Row {
     row: string;
     seats: Seat[];
 }
-
+interface SelectedShow {
+    showId: string | null;
+    hallId: string | null;
+    time: string | null;
+  }
+  
 
 interface BookingComponentProps {
     shows: Show | undefined;
@@ -56,7 +61,13 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [maxSeats, setMaxSeats] = useState<{ regular: number; vip: number; couple: number }>({ regular: 0, vip: 0, couple: 0 });
 
     const [hallId, setHallId] = useState<string>("");
-    const [selectedProducts, setSelectedProducts] = useState<{ [key: string]: { name: string, quantity: number } }>({});
+    const [selectedProducts, setSelectedProducts] = useState<{ [key: string]: { id: string, name: string, quantity: number } }>({});
+    const [selectedShow, setSelectedShow] = useState<SelectedShow>({
+        showId: null,
+        hallId: null,
+        time: null,
+      });
+      
 
     const loadSeatDiagam = async () => {
         if (hallId == "") return;
@@ -152,11 +163,25 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         setSelectedDay(day);
         setAvailableTimes(day.showTimes.map((showTime) => showTime.time));
         setHallId(hallId);
+        // Khởi tạo `selectedShow` với thông tin cơ bản
+        setSelectedShow({
+            showId: null, // Chưa chọn giờ chiếu, nên chưa biết showId
+            hallId,       // Cập nhật hallId
+            time: null,   // Chưa chọn giờ
+        });
         setSeatDiagram([]);
     };
 
     const handleSelectTime = (time: string) => {
         setSelectedTime(time);
+        // Tìm `showId` tương ứng với `time`
+        const showId = selectedDay?.showTimes.find((showTime) => showTime.time === time)?.showId || null;
+
+        setSelectedShow((prev) => ({
+            ...prev,
+            time,   // Cập nhật giờ chiếu
+            showId, // Cập nhật showId nếu tìm thấy
+        }));
     };
     const handleSelectSeat = (seat: Seat, rowIndex: number, seatIndex: number) => {
         const seatType = seat.type;
@@ -208,6 +233,10 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         setSelectedSeats(updatedSeats);
     };
     const handleCreateOrder = async () => {
+        if (!selectedShow) {
+            alert("Vui lòng chọn suất chiếu.");
+            return;
+        }
         if (!setSelectedDay && !setSelectedTime && !setHallId && selectedSeats.regular + selectedSeats.vip + selectedSeats.couple === 0) {
             alert("Vui lòng chọn đầy đủ ngày, giờ và ghế trong rạp");
             return;
@@ -223,11 +252,19 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             return;
         }
 
-        const orderData = {
-            showId: shows.shows?.id,
-            seatId: selectedSeatIds,
-            comboId: formatProductList()
+        if (!shows || !shows.shows) {
+            console.error("Dữ liệu shows không hợp lệ:", shows);
+            alert("Không tìm thấy thông tin show.");
+            return;
         }
+
+        const orderData = {
+            showId: selectedShow.hallId,
+            seatId: selectedSeatIds,
+            comboId: ComboListId()
+        }
+        console.log(selectedShow.hallId);
+        console.log(ComboListId());
         console.log(orderData);
         try {
             // Gọi service để tạo đơn hàng
@@ -238,16 +275,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         }
     }
 
-    // const handleSubmit = () => {
-    //     const totalSeats = selectedSeats.regular + selectedSeats.vip + selectedSeats.couple * 2;
-    //     const totalMaxSeats = maxSeats.regular + maxSeats.vip + maxSeats.couple * 2;
-
-    //     if (totalSeats === totalMaxSeats) {
-    //         alert("Đặt vé thành công!");
-    //     } else {
-    //         alert("Bạn chưa mua đủ loại ghế.");
-    //     }
-    // };
     const calculateTotalPrice = () => {
         let total = 0;
         const regularSeatType = seatTypes.find(seat => seat.type === "regular");
@@ -272,13 +299,19 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         setSelectedProducts(prev => {
             const updatedProducts = { ...prev };
             if (quantity > 0) {
-                updatedProducts[product.name] = { name: product.name, quantity };
+                updatedProducts[product.name] = { id: product.id,name: product.name, quantity };
             } else {
                 delete updatedProducts[product.name];  // Nếu số lượng = 0, xóa sản phẩm khỏi danh sách
             }
             return updatedProducts;
         });
     };
+    const ComboListId = () => {
+        return Object.values(selectedProducts)
+            .filter(product => product.quantity > 0) // Lọc ra các sản phẩm đã được chọn
+            .map(product => product.id); // Trả về ID của sản phẩm
+    };
+    
     const formatProductList = () => {
         return Object.values(selectedProducts)
             .map(product => `${product.quantity} ${product.name}`)
@@ -292,14 +325,12 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             </h1>
             <div className="d-flex flex-column align-items-center mb-4">
                 <h3>Suất Chiếu</h3>
-                {/* <div className="d-flex justify-content-center"> */}
                 <div>
                     {shows.shows?.listHall.map((hall, index) => (
                         <div
                             key={hall.hallId}
 
                             id={`show${index + 1}`}
-                        // onClick={() => handleSelectShow(show)}
                         >
                             {
                                 hall.listTime.map((time, index) => (
@@ -419,12 +450,9 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                 })}
                             </div>
                         ))}
-
                     </div>
-
                     <div className="container-product" style={{ padding: "50px 0" }}>
                         <h2 className="text-center">CHỌN BẮP NƯỚC</h2>
-
                         {/* Hiển thị sản phẩm Thức ăn */}
                         <h4 className="text-center" style={{ color: "yellow", fontSize: '2rem', marginBottom: '3rem' }}>Thức ăn</h4>
                         <div className="row d-flex justify-content-center">
@@ -443,7 +471,6 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                                 </div>
                             ))}
                         </div>
-
                     </div>
                     <div className="row text-start">
                         <div className="col-md-6">
@@ -482,12 +509,10 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                             <Link className="btn btn-warning" onClick={handleCreateOrder}>Đặt Vé</Link>
                         </div>
                     </div>
-
                 </div>
             )
             }
         </div >
     );
 };
-
 export default BookingComponent;
