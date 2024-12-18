@@ -1,15 +1,14 @@
 import "../../assets/css/authencation.prefixed.css";
 import { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { login } from "../../services/identityService"
-import { register } from "../../services/identityService"
+import { login, register } from "../../services/identityService"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 const AuthencationPage = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [loginData, setLoginData] = useState({ email: '', password: '' });
+    const [loginData, setLoginData] = useState({ email: "", password: "" });
     const [registerData, setRegisterData] = useState({
-        name: '', dateOfBirth: '', phoneNumber: '', email: '', password: '', confirmPassword: ''
+        name: '', phoneNumber: '', email: '', password: '', confirmPassword: ''
     });
     const [loginErrors, setLoginErrors] = useState<{ [key: string]: string }>({});
     const [registerErrors, setRegisterErrors] = useState<{ [key: string]: string }>({});
@@ -18,50 +17,30 @@ const AuthencationPage = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleLoginChange = (e: any) => {
+    const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setLoginData({ ...loginData, [id]: value });
     };
 
-    const handleRegisterChange = (e: any) => {
+    const handleRegisterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { id, value } = e.target;
         setRegisterData({ ...registerData, [id]: value });
     };
 
     const validateLogin = () => {
-        let errors: { [key: string]: string } = {};
-        if (!loginData.email) {
-            errors.email = "Vui lòng nhập email hoặc số điện thoại.";
-        }
-        if (!loginData.password) {
-            errors.password = "Vui lòng nhập mật khẩu.";
-        }
+        const errors: { [key: string]: string } = {};
+        if (!loginData.email) errors.email = "Vui lòng nhập email.";
+        if (!loginData.password) errors.password = "Vui lòng nhập mật khẩu.";
         setLoginErrors(errors);
         return Object.keys(errors).length === 0;
     };
 
     const validateRegister = () => {
-        let errors: { [key: string]: string } = {};
+        const errors: { [key: string]: string } = {};
         if (!registerData.name) {
             errors.name = "Vui lòng nhập họ và tên.";
         } else if (/[^a-zA-Z0-9\s\u00C0-\u1EF9]/.test(registerData.name)) {
             errors.name = 'Tên món không được chứa ký tự đặc biệt!';
-        }
-        if (!registerData.dateOfBirth) {
-            errors.dateOfBirth = "Vui lòng chọn ngày sinh.";
-        }
-        else {
-            const selectedDate = new Date(registerData.dateOfBirth);
-            const currentDate = new Date();
-
-            // Kiểm tra nếu ngày không hợp lệ
-            if (isNaN(selectedDate.getTime())) {
-                errors.dateOfBirth = "Ngày sinh không hợp lệ.";
-            }
-            // Kiểm tra nếu ngày trong tương lai
-            else if (selectedDate > currentDate) {
-                errors.dateOfBirth = "Ngày sinh không được là ngày trong tương lai.";
-            }
         }
         if (!registerData.phoneNumber) {
             errors.phoneNumber = "Vui lòng nhập số điện thoại.";
@@ -90,43 +69,55 @@ const AuthencationPage = () => {
         return Object.keys(errors).length === 0;
     };
 
-    const handleLoginSubmit = async (e: any) => {
+    const handleLoginSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (validateLogin()) {
-            try {
-                const response = await login(loginData);
-                console.log("Đăng nhập thành công:", response);
-
-                if (response && response.token) {
-                    localStorage.setItem("token", response.token);
-                    navigate("/");
-                    toast.success("Dang nhap thanh cong !");
-                }
-                // Xử lý đăng nhập thành công, như chuyển hướng người dùng hoặc lưu token
-            } catch (error) {
-                console.error("Đăng nhập thất bại:", error);
-                // Xử lý lỗi đăng nhập, chẳng hạn như thông báo lỗi cho người dùng
+        if (!validateLogin()) return;
+    
+        try {
+            const response = await login(loginData); // Gọi hàm login API
+            if (response && response.token) {
+                localStorage.setItem("token", response.token); // Lưu token vào localStorage
+    
+                // Hiển thị thông báo thành công
+                toast.success("Đăng nhập thành công!");
+    
+                // Chuyển hướng đến trang profile
+                navigate("/profile"); 
+            } else {
+                toast.error("Email hoặc mật khẩu không đúng!");
             }
+        } catch (error) {
+            console.error("Đăng nhập thất bại:", error);
+            toast.error("Có lỗi xảy ra trong quá trình đăng nhập.");
         }
     };
 
-    const handleRegisterSubmit = async (e: any) => {
+    const handleRegisterSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (validateRegister()) {
             try {
-                const simplifiedRegisterData = {
+                // Gửi toàn bộ thông tin đăng ký
+                const response = await register({
+                    name: registerData.name,
+                    phoneNumber: registerData.phoneNumber,
                     email: registerData.email,
                     password: registerData.password,
-                };
-                await register(simplifiedRegisterData);
-                console.log("Đăng ký thành công:", simplifiedRegisterData);
-                toast.success("Đăng ký thành công!");
+                    confirmPassword: registerData.confirmPassword
+                });
+    
+                if (response) {
+                    console.log("Đăng ký thành công:", response);
+                    toast.success("Đăng ký thành công!");
+                } else {
+                    toast.error("Đăng ký không thành công. Vui lòng thử lại.");
+                }
             } catch (error) {
                 console.error("Đăng ký thất bại:", error);
+                toast.error("Có lỗi xảy ra trong quá trình đăng ký.");
             }
-
         }
     };
+    
 
     return (
         <div className="AuthencationPage">
@@ -148,7 +139,7 @@ const AuthencationPage = () => {
 
                         <div className="tab-content" id="myTabContent">
                             <div className="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                                <form onSubmit={handleLoginSubmit}>
+                            <form onSubmit={handleLoginSubmit}>
                                     <div className="mx-4 pt-4">
                                         <div className="mb-3">
                                             <label htmlFor="email" className="form-label">Tài khoản, Email hoặc số điện thoại</label>
@@ -178,11 +169,7 @@ const AuthencationPage = () => {
                                             <input type="text" className="form-control" id="name" value={registerData.name} onChange={handleRegisterChange} />
                                             {registerErrors.name && <span className="text-danger">{registerErrors.name}</span>}
                                         </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="dateOfBirth" className="form-label">Ngày sinh</label>
-                                            <input type="date" className="form-control" id="dateOfBirth" value={registerData.dateOfBirth} onChange={handleRegisterChange} />
-                                            {registerErrors.dateOfBirth && <span className="text-danger">{registerErrors.dateOfBirth}</span>}
-                                        </div>
+
                                         <div className="mb-3">
                                             <label htmlFor="phoneNumber" className="form-label">Số điện thoại</label>
                                             <input type="phone" className="form-control" id="phoneNumber" value={registerData.phoneNumber} onChange={handleRegisterChange} />
