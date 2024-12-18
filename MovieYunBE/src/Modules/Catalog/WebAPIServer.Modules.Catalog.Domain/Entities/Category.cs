@@ -17,5 +17,6 @@ namespace WebAPIServer.Modules.Catalog.Domain.Entities
         /// Đồ ăn
         /// </summary>
         public static Guid Foods = Guid.Parse("1a5310dc-61b0-42fe-bbed-e5ed3475002d");
+        public static Guid Combos = Guid.Parse("c8cc115d-a5c5-4b91-a57f-3f60ede52338");
     }
 }

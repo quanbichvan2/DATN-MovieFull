@@ -42,6 +42,18 @@ namespace WebAPIServer.Modules.Booking.Domain.Entities
 	//	//public virtual ICollection<OrderTicketType>? TicketTypes { get; set; } = new List<OrderTicketType>();
 	//}
 
+  //  public class OrderLine : BaseEntity
+  //  {
+		//public Guid OrderId { get; set; }
+		//public double Price { get; set; }
+		//public Guid SeatId { get; set; }
+  //      public string SeatName { get; set; } = string.Empty;
+
+  //      // Reference to tickets.TicketTypes
+  //      public Guid TypeId { get; set; }
+  //      public string TypeName { get; set; } = string.Empty;
+  //  }
+
     public class Order : BaseAuditableEntity
     {
         public double Amount { get; set; }
@@ -58,18 +70,6 @@ namespace WebAPIServer.Modules.Booking.Domain.Entities
         //public ICollection<OrderMovie> OrderMovies { get; set; } = new List<OrderMovie>();
         //public ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
     }
-
-  //  public class OrderLine : BaseEntity
-  //  {
-		//public Guid OrderId { get; set; }
-		//public double Price { get; set; }
-		//public Guid SeatId { get; set; }
-  //      public string SeatName { get; set; } = string.Empty;
-
-  //      // Reference to tickets.TicketTypes
-  //      public Guid TypeId { get; set; }
-  //      public string TypeName { get; set; } = string.Empty;
-  //  }
 
     public class OrderMovie : BaseEntity
     {

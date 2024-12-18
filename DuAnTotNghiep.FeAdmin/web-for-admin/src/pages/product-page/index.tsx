@@ -12,7 +12,7 @@ import { editFood } from '../../services/productService';
 const FoodManagementPage = () => {
   const FOOD_CATEGORY_ID = '1a5310dc-61b0-42fe-bbed-e5ed3475002d'; // Thay đổi ID này theo cấu trúc của bạn
   const DRINK_CATEGORY_ID = '1a5310dc-61b0-42fe-bbed-e5ed3475002f'; // Thay đổi ID này theo cấu trúc của bạn
-  const COMBO_CATEGORY_ID = '1a5310dc-61b0-42fe-bbed-e5ed3475002d'; // Thay đổi ID này theo cấu trúc của bạn
+  const COMBO_CATEGORY_ID = 'c8cc115d-a5c5-4b91-a57f-3f60ede52338'; // Thay đổi ID này theo cấu trúc của bạn
   const [foods, setFoods] = useState<productDto[]>([
   ]);
 

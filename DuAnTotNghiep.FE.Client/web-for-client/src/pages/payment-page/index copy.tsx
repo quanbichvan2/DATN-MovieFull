@@ -7,22 +7,68 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
 const PaymentPage = () => {
-    const [currentStep, setCurrentStep] = useState(1);
-    const [paymentSuccess, setPaymentSuccess] = useState(false);
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-    const stripe = useStripe();
-    const elements = useElements();
-    const stripePromise = loadStripe('pk_test_51QMTJEGoIZvD6rjmJtwjiquJtr6MsOQSCK6n3jEXEdjnisj9FjSYDZPMr00SgACQBEkp58SErxJEFokLMmZRv72h006G8Uzsk7');
-
+    const ticketData = {
+        movieTitle: "JOKER: FOLIE À DEUX ĐIÊN CÓ ĐÔI (T18)",
+        countdown: "05:00",
+        ageRestriction: "Phim dành cho khán giả từ đủ 18 tuổi trở lên (18+)",
+        cinemaName: "7Cinestar",
+        cinemaAddress: "Nhà văn hóa sinh viên, Đại học Quốc gia HCM, P.Đông Hòa, Dĩ An, Bình Dương",
+        showTime: "19:30 Thứ Sáu 04/10/2024",
+        roomNumber: "01",
+        ticketCount: 1,
+        ticketType: "HSSV-Người Cao Tuổi",
+        seatType: "Ghế Thường",
+        seatNumber: "C11",
+        popcornInfo: "6 combo có gấu",
+        totalAmount: "45,000 VND"
+    };
     const location = useLocation();
-    const { orderData } = location.state || {}; 
-    if (!orderData) {
-        return <div>Không tìm thấy dữ liệu đơn hàng. Vui lòng thử lại!</div>;
-    }
+    const orderData = location.state?.orderData;
+    const stripePromise = loadStripe('pk_test_your_public_key');
+    const PaymentForm = ({ clientSecret }: { clientSecret: string }) => {
+        const stripe = useStripe();
+        const elements = useElements();
+    
+        const [isProcessing, setIsProcessing] = useState(false);
+        const [errorMessage, setErrorMessage] = useState('');
+        const [paymentSuccess, setPaymentSuccess] = useState(false);
+    
+        const handleSubmit = async (event: React.FormEvent) => {
+            event.preventDefault();
+    
+            if (!stripe || !elements) return;
+    
+            setIsProcessing(true);
+            const cardElement = elements.getElement(CardElement);
+    
+            try {
+                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardElement!,
+                    },
+                });
+    
+                if (error) {
+                    setErrorMessage(error.message || 'Lỗi thanh toán');
+                    setIsProcessing(false);
+                    return;
+                }
+    
+                if (paymentIntent && paymentIntent.status === 'succeeded') {
+                    setPaymentSuccess(true);
+                    alert('Thanh toán thành công!');
+                }
+            } catch (error) {
+                setErrorMessage('Đã xảy ra lỗi, vui lòng thử lại sau.');
+            } finally {
+                setIsProcessing(false);
+            }
+        };
+
 
 
     const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
+    const [currentStep, setCurrentStep] = useState(1);
     const [showTicketInfo, setShowTicketInfo] = useState(true);
     const discountCodes: { Happy20K: number; Happy50K: number } = {
         Happy20K: 20000,
@@ -130,60 +176,52 @@ const PaymentPage = () => {
     };
 
     const handlePaymentSuccess = async () => {
-        // Kiểm tra phương thức thanh toán
         if (!formData.paymentMethod) {
             setErrors({ ...errors, paymentMethod: 'Vui lòng chọn phương thức thanh toán.' });
             return;
         }
 
-        // Xử lý giảm giá
         let discountAmount = 0;
         if (formData.discountCode && discountCodes[formData.discountCode]) {
             discountAmount = discountCodes[formData.discountCode];
         }
 
-        const originalAmount = parseInt(orderData.totalAmount.replace(/\D/g, ""), 10);
+        const originalAmount = parseInt(ticketData.totalAmount.replace(/\D/g, ""), 10);
         const finalAmount = Math.max(originalAmount - discountAmount, 0);
 
-        // Kiểm tra nếu thanh toán qua Stripe
-        if (formData.paymentMethod === "stripe") {
-            if (!stripe || !elements) {
-                setErrorMessage("Stripe chưa được khởi tạo.");
-                return;
-            }
+        // if (formData.paymentMethod === 'Vnpay') {
+        //     try {
+        //         const response = await fetch("https://localhost:7022/payment-module/Payment/vnpay", {
+        //             method: "POST",
+        //             headers: { "Content-Type": "application/json" },
+        //             body: JSON.stringify({
+        //                 amount: finalAmount,
+        //                 orderInfo: `Thanh toán vé ${ticketData.movieTitle}`,
+        //             }),
+        //         });
 
-            setIsProcessing(true);
-            const cardElement = elements.getElement(CardElement);
+        //         const data = await response.json();
 
-            try {
-                const clientSecret = "sk_test_51QMTJEGoIZvD6rjmqIYSdel9VsajwLQGmpMKNKUr1Jn3iQhPIqIUJzTJUKNcb4V0PlKCJZNHsjpGuylweTYP8cJi00wj6vFfDj"; // Thay thế bằng secret từ server
-                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: cardElement!,
-                    },
-                });
+        //         if (data && data.paymentUrl) {
+        //             window.location.href = data.paymentUrl; // Chuyển hướng đến URL thanh toán từ BE
+        //         } else {
+        //             alert("Có lỗi xảy ra khi tạo URL thanh toán.");
+        //         }
+        //     } catch (error) {
+        //         console.error("Lỗi kết nối tới server:", error); // đang bị lỗi ở đây
+        //         alert("Không thể kết nối tới server.");
+        //     }
+        // } else {
+        //     alert(`Số tiền sau khi áp dụng mã giảm giá là: ${finalAmount.toLocaleString('vi-VN')} VND`);
+        //     setShowTicketInfo(false);
+        //     setCurrentStep(3);
+        // }
 
-                if (error) {
-                    setErrorMessage(error.message || "Lỗi thanh toán.");
-                    setIsProcessing(false);
-                    return;
-                }
-
-                if (paymentIntent?.status === "succeeded") {
-                    setPaymentSuccess(true);
-                    setCurrentStep(3); // Đi đến bước hoàn thành
-                }
-            } catch (error) {
-                setErrorMessage("Đã xảy ra lỗi, vui lòng thử lại sau.");
-            } finally {
-                setIsProcessing(false);
-            }
-        } else {
-            // Xử lý các phương thức thanh toán khác
-            setShowTicketInfo(false);
-            setCurrentStep(3);
-        }
+        setShowTicketInfo(false);
+        setCurrentStep(3);
     };
+
+
 
     const handlePaymentFail = () => {
         window.location.href = '/';
@@ -362,29 +400,10 @@ const PaymentPage = () => {
                                             <img src="https://cdn-icons-png.flaticon.com/512/2460/2460470.png" alt="cashPay" />
                                             Thanh Toán Trực Tiếp
                                         </label>
+
                                     </div>
                                     {errors.paymentMethod && <span className="text-danger">{errors.paymentMethod}</span>}
                                 </div>
-                                {selectedPaymentMethod === 'credit-card' && (
-                                    <Elements stripe={stripePromise}>
-                                        <form
-                                            className="paymentForm-step active"
-                                            onSubmit={handlePaymentSuccess}
-                                        >
-                                            <div>
-                                                <label htmlFor="card-element">Thông tin thẻ</label>
-                                                <CardElement id="card-element" />
-                                            </div>
-                                            <button type="submit" disabled={isProcessing}>
-                                                {isProcessing ? 'Đang xử lý...' : 'Thanh toán'}
-                                            </button>
-                                            {errorMessage && (
-                                                <p className="text-danger">{errorMessage}</p>
-                                            )}
-                                        </form>
-                                    </Elements>
-                                )}
-
                                 <div className="paymentForm-group">
                                     <label htmlFor="discount-code">Mã giảm giá</label>
                                     <input
@@ -410,6 +429,7 @@ const PaymentPage = () => {
                                 </button>
                             </div>
                         )}
+
                         {/* Bước 3: Thanh toán thành công */}
                         {currentStep === 3 && (
                             <div className="paymentForm-step paymentForm-step3 active">
@@ -417,8 +437,9 @@ const PaymentPage = () => {
                             </div>
                         )}
                     </div>
+
                     {/* Phần thông tin vé */}
-                    {showTicketInfo && <TicketInfo ticketData={orderData} />}
+                    {showTicketInfo && <TicketInfo ticketData={ticketData} />}
                 </div>
             </div>
         </div>

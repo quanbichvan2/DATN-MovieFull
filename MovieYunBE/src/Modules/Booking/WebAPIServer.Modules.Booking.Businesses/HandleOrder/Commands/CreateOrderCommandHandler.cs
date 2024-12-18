@@ -160,23 +160,36 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Commands
 					ComboDto combo = null;
                     try
 					{
-                        product = await _catalogModuleApi.GetProductByIdAsync(item.ComboId);
+                        //product = await _catalogModuleApi.GetProductByIdAsync(item.ComboId);
                         combo = await _catalogModuleApi.GetComboByIdAsync(item.ComboId);
+                        // Nếu không tìm thấy combo, kiểm tra sản phẩm lẻ
+                        if (combo == null)
+                        {
+                            product = await _catalogModuleApi.GetProductByIdAsync(item.ComboId);
+                        }
+
+                        // Nếu cả combo và sản phẩm lẻ đều không tìm thấy, trả về lỗi
+                        if (combo == null && product == null)
+                        {
+                            return ResponseExceptionHelper.ErrorResponse<ComboDto>(ErrorCode.NotFound);
+                        }
                     }
 					catch (Exception)
 					{
-                        if (combo == null)
-                        {
-                            if (product == null)
-                                return ResponseExceptionHelper.ErrorResponse<ComboDto>(ErrorCode.NotFound);
-                        }
+                        return ResponseExceptionHelper.ErrorResponse<ComboDto>(ErrorCode.OperationFailed);
+                        //if (combo == null)
+                        //{ 
+                        //    if (product == null)
+                        //        return ResponseExceptionHelper.ErrorResponse<ComboDto>(ErrorCode.NotFound);
+                        //}
                     }
 
                     var line = new OrderCombo();
 					line.OrderId = order.Id;
 					line.ComboId = combo != null ? combo.Id : product.Id;
 					line.ComboName = combo != null ? combo.Name : product.Name;
-					line.ComboTypeName = string.Empty;
+					//line.ComboTypeName = string.Empty;
+					line.ComboTypeName = combo != null ? "Combo" : "Product";
                     line.Price = combo != null ? combo.Price : product.Price;
                     line.Quantity = item.Quantity;
 

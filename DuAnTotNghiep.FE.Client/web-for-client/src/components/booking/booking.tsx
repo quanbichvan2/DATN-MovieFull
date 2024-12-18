@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import seatDiagramData from "../../assets/seatDiagram.json";
+import { useNavigate } from "react-router-dom";
 
 import seatService from "../../services/seatService";
 import productService from "../../services/productService";
@@ -32,8 +33,8 @@ interface SelectedShow {
     showId: string | null;
     hallId: string | null;
     time: string | null;
-  }
-  
+}
+
 
 interface BookingComponentProps {
     shows: Show | undefined;
@@ -46,7 +47,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
     const [seatDiagram, setSeatDiagram] = useState<any[]>([]);
     const [selectedSeats, setSelectedSeats] = useState<{ regular: number; vip: number; couple: number }>({ regular: 0, vip: 0, couple: 0 });
     const [countdown,] = useState<number>(300); // Giá trị ban đầu là 300 giây (5 phút)
-    const totalPrice = 675000; // Giá trị tạm tính
+    // const totalPrice = 675000; // Giá trị tạm tính
 
     const [products, setProducts] = useState<Product[]>([]);
 
@@ -66,8 +67,9 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         showId: null,
         hallId: null,
         time: null,
-      });
-      
+    });
+
+    const navigate = useNavigate();
 
     const loadSeatDiagam = async () => {
         if (hallId == "") return;
@@ -257,19 +259,32 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
             alert("Không tìm thấy thông tin show.");
             return;
         }
+        console.log("selectedProducts:", selectedProducts);
+        console.log("Combo List IDs:", ComboListId());
+        console.log("Quantities:", ComboListId().map(comboId => selectedProducts[comboId]?.quantity));
 
         const orderData = {
-            showId: selectedShow.hallId,
-            seatId: selectedSeatIds,
-            comboId: ComboListId()
+            voucherId: null,
+            // showId: selectedShow.hallId,
+            // seatId: selectedSeatIds,
+            line: selectedSeatIds.map(seatId => ({
+                showId: selectedShow.showId, // Giả sử showId là thuộc tính của selectedShow
+                seatId: seatId,               // seatId từ selectedSeatIds
+            })),
+            combos: ComboListId().map(comboId => ({
+                comboId,
+                quantity: selectedProducts[comboId]?.quantity || 0, // Gán số lượng từ selectedProducts
+            })),
         }
-        console.log(selectedShow.hallId);
-        console.log(ComboListId());
+        console.log(orderData.line);
+        console.log(orderData.combos);
+        console.log(orderData.combos.map(p => p.quantity));
         console.log(orderData);
         try {
             // Gọi service để tạo đơn hàng
             await orderService.createOrder(orderData);
             alert("Đặt vé thành công!");
+            navigate('/payment', { state: { orderData } });
         } catch (error) {
             alert("Đặt vé thất bại!");
         }
@@ -299,19 +314,20 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
         setSelectedProducts(prev => {
             const updatedProducts = { ...prev };
             if (quantity > 0) {
-                updatedProducts[product.name] = { id: product.id,name: product.name, quantity };
+                updatedProducts[product.name] = { id: product.id, name: product.name, quantity };
             } else {
-                delete updatedProducts[product.name];  // Nếu số lượng = 0, xóa sản phẩm khỏi danh sách
+                delete updatedProducts[product.id];  // Nếu số lượng = 0, xóa sản phẩm khỏi danh sách
             }
             return updatedProducts;
         });
     };
     const ComboListId = () => {
-        return Object.values(selectedProducts)
-            .filter(product => product.quantity > 0) // Lọc ra các sản phẩm đã được chọn
-            .map(product => product.id); // Trả về ID của sản phẩm
+        return Object.keys(selectedProducts)  // Lấy các comboId từ selectedProducts
+            .filter(comboId => selectedProducts[comboId].quantity > 0) // Lọc các combo có quantity > 0
+            .map(comboId => comboId); // Trả về ID của combo
     };
-    
+
+
     const formatProductList = () => {
         return Object.values(selectedProducts)
             .map(product => `${product.quantity} ${product.name}`)
@@ -456,7 +472,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                         {/* Hiển thị sản phẩm Thức ăn */}
                         <h4 className="text-center" style={{ color: "yellow", fontSize: '2rem', marginBottom: '3rem' }}>Thức ăn</h4>
                         <div className="row d-flex justify-content-center">
-                            {filterProductsByCategory('Bắp').map((product, index) => (
+                            {filterProductsByCategory('Snack').map((product, index) => (
                                 <div className="col-md-4" key={index}>
                                     <SnackComponent product={product} onChange={handleProductChange} />
                                 </div>

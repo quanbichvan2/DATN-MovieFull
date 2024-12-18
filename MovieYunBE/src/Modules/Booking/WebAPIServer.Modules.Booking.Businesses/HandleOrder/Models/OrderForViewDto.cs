@@ -6,14 +6,14 @@ namespace WebAPIServer.Modules.Booking.Businesses.HandleOrder.Models
 	{
 		//Order
 		public Guid Id { get; set; }
-		public string OrderStatus { get; set; } = default!;
+		public string OrderStatus { get; set; } = "Pending";
 		public double? Amount { get; set; }
 		public double? SubAmount { get; set; }
 		//User
 		public string? UserName { get; set; }
 		//Movie
 		public string HallName { get; set; } = default!;
-		public string CinemaName { get; set; } = default!;
+		public string CinemaName { get; set; } = "7 Cinema";
 		public DateTimeOffset? ShowStartAt { get; set; }
 		public DateTimeOffset? ShowEndAt { get; set; }
 		public string? ShowStartEndTime { get; set; } = default!;
