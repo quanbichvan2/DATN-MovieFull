@@ -69,14 +69,6 @@ const SideBarInfo: React.FC<SideBarInfoProps> = ({ onNavigate }) => {
             <i className="bi bi-clock-history"></i> Lịch sử mua hàng
           </a>
         </nav>
-
-        <hr />
-
-        <div className="logout">
-          <a href="#">
-            <i className="bi bi-box-arrow-right"></i> Đăng xuất
-          </a>
-        </div>
       </div>
     </section>
   );

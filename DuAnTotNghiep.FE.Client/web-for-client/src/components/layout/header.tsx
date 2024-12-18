@@ -11,20 +11,29 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
   useEffect(() => {
     // Kiểm tra xem token có tồn tại trong local storage không
     const token = localStorage.getItem("token");
+    const avatar = localStorage.getItem("userAvatar");
     if (token) {
       setIsLoggedIn(true);
     }
+
+    if (token && avatar) {
+      setIsLoggedIn(true);
+      setUserAvatar(avatar);
+  }
   }, []);
   const handleLogout = () => {
    
-    // Xóa trạng thái đăng nhập
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    navigate("/")
-    toast.success("Đăng xuất thành công");
+     // Xóa dữ liệu trong localStorage khi đăng xuất
+     localStorage.removeItem("token");
+     localStorage.removeItem("userAvatar");
+     setIsLoggedIn(false);
+     setUserAvatar(null);
+     toast.success("Đăng xuất thành công!");
+     navigate("/");
     // Chuyển hướng hoặc thực hiện các hành động cần thiết
 };
   return (
@@ -83,21 +92,33 @@ const Header: React.FC = () => {
           <Link to="/search" className="d-inline d-md-none ms-3">
             <i className="fas fa-search" />
           </Link>
-          {isLoggedIn ? (
-            <button
-              onClick={handleShowModal}
-              className="btn btn-outline-dreamblue d-none d-md-inline ms-3 header-login-btn"
-            >
-              Đăng Xuất
-            </button>
-          ) : (
-            <Link
-              to="/identity"
-              className="btn btn-outline-dreamblue d-none d-md-inline ms-3 header-login-btn"
-            >
-              Đăng Nhập
-            </Link>
-          )}
+           {/* Hiển thị avatar nếu đã đăng nhập, nút Đăng Nhập nếu chưa */}
+           {isLoggedIn ? (
+                <div className="dropdown">
+                    <img
+                        src={userAvatar || "https://i.pravatar.cc/150"}
+                        alt="User Avatar"
+                        className="rounded-circle"
+                        width="50"
+                        height="50"
+                        style={{ cursor: "pointer" }}
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    />
+                    <ul className="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <Link className="dropdown-item" to="/profile">Hồ Sơ Cá Nhân</Link>
+                        </li>
+                        <li>
+                            <button className="dropdown-item text-danger" onClick={handleShowModal}>
+                                Đăng Xuất
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            ) : (
+                <Link to="/identity" className="btn btn-outline-primary">Đăng Nhập</Link>
+            )}
           
           <Link to="/dang-nhap" className="d-inline d-md-none ms-3">
             <i className="fas fa-user" />
