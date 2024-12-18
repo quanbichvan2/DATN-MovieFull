@@ -12,7 +12,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="info">
-      <main className="container-fluid">
+      <main className="container ">
       <div className="row">
         <SideBarInfo onNavigate={handleNavigate} />
         <ProfileSectionForm section={section} />
