@@ -1,5 +1,6 @@
 // import { Payment } from "../models/order";
 import baseApi from "../apis/base";
+import { Order } from "../models/order";
 
 const orderService = {
     createOrder: async (orderData : any): Promise<Order> => {

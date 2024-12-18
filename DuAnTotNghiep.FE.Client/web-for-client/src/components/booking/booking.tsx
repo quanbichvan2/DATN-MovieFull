@@ -522,7 +522,7 @@ const BookingComponent: React.FC<BookingComponentProps> = (shows) => {
                             {/* <button onClick={handleSubmit} className="btn btn-warning" id="reserveBtn">
                                 Đặt Vé
                             </button> */}
-                            <Link className="btn btn-warning" onClick={handleCreateOrder}>Đặt Vé</Link>
+                            <div className="btn btn-warning" onClick={handleCreateOrder}>Đặt Vé</div>
                         </div>
                     </div>
                 </div>

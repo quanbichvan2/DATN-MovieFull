@@ -1,10 +1,11 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
-import { getAllSeatsType } from "../services/seatService"
+// import { getAllSeatsType } from "../services/seatService"
+import seatService from "../services/seatService";
 import { queryClient } from "../components/AppProvider"
 
 export const useSeatsTypeQuerry = () => {
 return useQuery({
-        queryFn: getAllSeatsType,
+        queryFn: seatService.getAllSeatsType,
         queryKey: ['seats']
     })
 }
